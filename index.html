@@ -485,9 +485,6 @@ details.case-study[open] .case-body{
     }catch(e){}
   }
 
-  // Record the portfolio visit.
-  logToSheet(getVisitorContext());
-
   function openVisitorModal(){
     if(!visitorModal) return;
     visitorModal.classList.add('show');
@@ -504,7 +501,7 @@ details.case-study[open] .case-body{
 
   visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
     const type=btn.dataset.visitorType || 'Exploring';
-    logToSheet({...getVisitorContext(),event:'visitor_type',visitor_type:type});
+    logToSheet({...getVisitorContext(),event:'portfolio_response',visitor_type:type});
     closeVisitorModal();
   }));
 
