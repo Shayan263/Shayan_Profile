@@ -449,93 +449,9 @@ details.case-study[open] .case-body{
   window.addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
 
 
-  // Visitor-intent popup + optional Google Sheets analytics endpoint.
-  const TRACKING_ENDPOINT = ""; // Set to your deployed Apps Script /exec URL after the sheet is ready.
+  // Visitor-intent popup.
   const visitorModal = document.getElementById('visitorModal');
   const visitorChoices = [...document.querySelectorAll('[data-visitor-type]')];
-
-  // Safe storage helpers so the popup also works when index.html is opened locally.
-  function safeGet(store, key){
-    try{return window[store].getItem(key)}catch(e){return null}
-  }
-  function safeSet(store, key, value){
-    try{window[store].setItem(key,value)}catch(e){}
-  }
-
-  // Anonymous browser-level visitor ID. This is intentionally not tied to a name, email or IP.
-  const existingVisitorId=safeGet('localStorage','shayan-anonymous-visitor-id');
-  const anonymousVisitorId=existingVisitorId || ('visitor-'+Date.now()+'-'+Math.random().toString(36).slice(2));
-  safeSet('localStorage','shayan-anonymous-visitor-id',anonymousVisitorId);
-
-  const existingVisitId=safeGet('sessionStorage','shayan-visit-id');
-  const visitId=existingVisitId || ('visit-'+Date.now()+'-'+Math.random().toString(36).slice(2));
-  safeSet('sessionStorage','shayan-visit-id',visitId);
-
-  function getLocalDateKey(){
-    const d=new Date();
-    const y=d.getFullYear();
-    const m=String(d.getMonth()+1).padStart(2,'0');
-    const day=String(d.getDate()).padStart(2,'0');
-    return y+'-'+m+'-'+day;
-  }
-
-  function getDailyPopupCount(){
-    const key='shayan-popup-count-'+getLocalDateKey();
-    const value=parseInt(safeGet('localStorage',key)||'0',10);
-    return Number.isFinite(value) ? value : 0;
-  }
-
-  function recordPopupOpen(){
-    const dateKey=getLocalDateKey();
-    const key='shayan-popup-count-'+dateKey;
-    const nextCount=getDailyPopupCount()+1;
-    safeSet('localStorage',key,String(nextCount));
-
-    sendTracking({
-      ...getVisitContext(),
-      event:'popup_open',
-      visitor_type:'',
-      popup_date:dateKey,
-      popup_entries_today:String(nextCount),
-      anonymous_visitor_id:anonymousVisitorId
-    });
-
-    return nextCount;
-  }
-
-  function getVisitContext(){
-    const params = new URLSearchParams(window.location.search);
-    let source = (params.get('utm_source') || '').trim().toLowerCase();
-    let refHost = '';
-    try { refHost = document.referrer ? new URL(document.referrer).hostname : ''; } catch(e){}
-    if(!source && refHost.includes('linkedin.com')) source='linkedin';
-    if(!source && refHost) source=refHost.replace(/^www\./,'');
-    if(!source) source='direct';
-    const width=window.innerWidth;
-    const device=width<640?'Mobile':(width<1024?'Tablet':'Desktop');
-    return {
-      visit_id: visitId,
-      event: 'page_view',
-      visitor_type: '',
-      source: source,
-      medium: params.get('utm_medium') || '',
-      campaign: params.get('utm_campaign') || '',
-      device: device,
-      page: window.location.pathname,
-      referrer: refHost,
-      screen_width: String(width),
-      anonymous_visitor_id: anonymousVisitorId
-    };
-  }
-  function sendTracking(payload){
-    if(!TRACKING_ENDPOINT) return;
-    try{
-      const query=new URLSearchParams(payload).toString();
-      const pixel=new Image();
-      pixel.src=TRACKING_ENDPOINT + (TRACKING_ENDPOINT.includes('?')?'&':'?') + query;
-    }catch(e){}
-  }
-  sendTracking(getVisitContext());
 
   function openVisitorModal(){
     if(!visitorModal) return;
@@ -543,30 +459,23 @@ details.case-study[open] .case-body{
     visitorModal.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
   }
+
   function closeVisitorModal(){
     if(!visitorModal) return;
     visitorModal.classList.remove('show');
     visitorModal.setAttribute('aria-hidden','true');
     document.body.style.overflow='';
   }
+
   visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
-    const type=btn.dataset.visitorType || 'Exploring';
-    sendTracking({
-      ...getVisitContext(),
-      event:'visitor_type',
-      visitor_type:type,
-      popup_date:getLocalDateKey(),
-      popup_entries_today:String(getDailyPopupCount())
-    });
     closeVisitorModal();
   }));
-  // The popup is visible by default in the HTML so it also works in local/preview environments.
-  // Keep this tiny startup step as a safeguard for normal web hosting.
+
+  // Show the visitor-intent popup whenever the page finishes loading.
   function showVisitorPopup(){
     if(!visitorModal) return;
     visitorModal.classList.add('show');
     visitorModal.setAttribute('aria-hidden','false');
-    recordPopupOpen();
   }
   if(document.readyState==='loading'){
     document.addEventListener('DOMContentLoaded',showVisitorPopup,{once:true});
