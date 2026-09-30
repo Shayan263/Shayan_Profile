@@ -8,7 +8,7 @@ Welcome to my SAP ABAP development portfolio.
 
 > For the HTML page to open as a rendered website from GitHub, enable **GitHub Pages** for this repository. The final public website will look like:
 >
-> https://github.com/Shayan263/Shayan_Profile/`
+> https://shayan263.github.io/Shayan_Profile/
 
 ## About
 
