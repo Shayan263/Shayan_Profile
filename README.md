@@ -4,7 +4,7 @@ Welcome to my SAP ABAP development portfolio.
 
 ## Resume / Portfolio Website
 
-👉 **[View my Resume & Portfolio](./index.html)**
+👉 **[View my Resume & Portfolio](https://shayan263.github.io/Shayan_Profile/)**
 
 > For the HTML page to open as a rendered website from GitHub, enable **GitHub Pages** for this repository. The final public website will look like:
 >
