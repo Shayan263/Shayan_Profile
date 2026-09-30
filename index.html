@@ -616,12 +616,30 @@ details.case-study[open] .case-body{
     };
   }
 
-  function logToSheet(data){
+  async function logToSheet(data){
+    const query=new URLSearchParams(data).toString();
+    const url=TRACKING_ENDPOINT+'?'+query;
+
+    // Use fetch with keepalive so mobile browsers can finish the request
+    // even while the popup/page is being closed or navigated away from.
     try{
-      const query=new URLSearchParams(data).toString();
-      const beacon=new Image();
-      beacon.src=TRACKING_ENDPOINT+'?'+query;
-    }catch(e){}
+      await fetch(url,{
+        method:'GET',
+        mode:'no-cors',
+        cache:'no-store',
+        keepalive:true
+      });
+      return true;
+    }catch(e){
+      // Fallback for browsers that block keepalive/fetch.
+      try{
+        const beacon=new Image();
+        beacon.src=url;
+        return true;
+      }catch(err){
+        return false;
+      }
+    }
   }
 
   function openVisitorModal(){
