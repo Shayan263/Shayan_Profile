@@ -461,9 +461,47 @@ details.case-study[open] .case-body{
   function safeSet(store, key, value){
     try{window[store].setItem(key,value)}catch(e){}
   }
+
+  // Anonymous browser-level visitor ID. This is intentionally not tied to a name, email or IP.
+  const existingVisitorId=safeGet('localStorage','shayan-anonymous-visitor-id');
+  const anonymousVisitorId=existingVisitorId || ('visitor-'+Date.now()+'-'+Math.random().toString(36).slice(2));
+  safeSet('localStorage','shayan-anonymous-visitor-id',anonymousVisitorId);
+
   const existingVisitId=safeGet('sessionStorage','shayan-visit-id');
   const visitId=existingVisitId || ('visit-'+Date.now()+'-'+Math.random().toString(36).slice(2));
   safeSet('sessionStorage','shayan-visit-id',visitId);
+
+  function getLocalDateKey(){
+    const d=new Date();
+    const y=d.getFullYear();
+    const m=String(d.getMonth()+1).padStart(2,'0');
+    const day=String(d.getDate()).padStart(2,'0');
+    return y+'-'+m+'-'+day;
+  }
+
+  function getDailyPopupCount(){
+    const key='shayan-popup-count-'+getLocalDateKey();
+    const value=parseInt(safeGet('localStorage',key)||'0',10);
+    return Number.isFinite(value) ? value : 0;
+  }
+
+  function recordPopupOpen(){
+    const dateKey=getLocalDateKey();
+    const key='shayan-popup-count-'+dateKey;
+    const nextCount=getDailyPopupCount()+1;
+    safeSet('localStorage',key,String(nextCount));
+
+    sendTracking({
+      ...getVisitContext(),
+      event:'popup_open',
+      visitor_type:'',
+      popup_date:dateKey,
+      popup_entries_today:String(nextCount),
+      anonymous_visitor_id:anonymousVisitorId
+    });
+
+    return nextCount;
+  }
 
   function getVisitContext(){
     const params = new URLSearchParams(window.location.search);
@@ -485,7 +523,8 @@ details.case-study[open] .case-body{
       device: device,
       page: window.location.pathname,
       referrer: refHost,
-      screen_width: String(width)
+      screen_width: String(width),
+      anonymous_visitor_id: anonymousVisitorId
     };
   }
   function sendTracking(payload){
@@ -512,7 +551,13 @@ details.case-study[open] .case-body{
   }
   visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
     const type=btn.dataset.visitorType || 'Exploring';
-    sendTracking({...getVisitContext(),event:'visitor_type',visitor_type:type});
+    sendTracking({
+      ...getVisitContext(),
+      event:'visitor_type',
+      visitor_type:type,
+      popup_date:getLocalDateKey(),
+      popup_entries_today:String(getDailyPopupCount())
+    });
     closeVisitorModal();
   }));
   // The popup is visible by default in the HTML so it also works in local/preview environments.
@@ -521,6 +566,7 @@ details.case-study[open] .case-body{
     if(!visitorModal) return;
     visitorModal.classList.add('show');
     visitorModal.setAttribute('aria-hidden','false');
+    recordPopupOpen();
   }
   if(document.readyState==='loading'){
     document.addEventListener('DOMContentLoaded',showVisitorPopup,{once:true});
