@@ -56,6 +56,64 @@ details.case-study{border:1px solid var(--border);border-radius:14px;background:
 .contact-band{display:flex;justify-content:space-between;align-items:center;gap:28px;padding:28px 30px;border-radius:16px;background:linear-gradient(135deg,#17385f 0%,#234e7c 55%,#2b5d8e 100%);color:#fff;border:1px solid rgba(255,255,255,.12);box-shadow:0 10px 28px rgba(10,55,95,.18)}.contact-band>div:first-child{min-width:0}.contact-band .section-kicker{color:#b9d9f8!important}.contact-band h2{color:#fff!important;margin-bottom:7px;font-size:clamp(26px,3vw,31px)}.contact-band .muted{color:#e8f1fb;font-size:15.5px;line-height:1.6;max-width:720px}.contact-band .contacts{flex-shrink:0}.contact-band .contacts a{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.25);color:#fff;font-weight:650;min-width:78px;text-align:center}.contact-band .contacts a:hover{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.15);transform:translateY(-2px)}
 footer{text-align:center;color:var(--muted);padding:18px 0 40px;font-size:13px}
 .hidden{display:none!important}
+
+/* Smooth interaction layer — visual transitions only; page content remains unchanged. */
+html{scroll-behavior:smooth}
+body{transition:background-color .35s ease,color .35s ease}
+header,section,.card,.metric,.case-card,.case-study,.process-card,.skill-group,.work-intro,.work-map-card,.architecture,.approach-step,.cert-feature,.contact-band{
+  transition:
+    background-color .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease,
+    transform .35s cubic-bezier(.22,1,.36,1);
+}
+.reveal{
+  opacity:0;
+  transform:translate3d(0,24px,0);
+  transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);
+  will-change:opacity,transform;
+}
+.reveal.visible{opacity:1;transform:translate3d(0,0,0)}
+.card:hover,.metric:hover,.case-card:hover,.process-card:hover,.skill-group:hover,.work-map-card:hover{
+  transition-duration:.25s;
+}
+.contacts a,.quick-nav a,.filter-btn,.small-action,.work-actions button,.theme-toggle,.navlinks a{
+  transition:
+    color .25s ease,
+    background-color .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .25s cubic-bezier(.22,1,.36,1);
+}
+.contacts a:hover,.quick-nav a:hover,.work-actions button:hover{
+  transform:translateY(-3px);
+}
+.navlinks a:hover,.navlinks a.active,.filter-btn:hover,.filter-btn.active{
+  transform:translateY(-1px);
+}
+details.case-study summary{
+  transition:background-color .25s ease,color .25s ease,padding-left .25s ease;
+}
+details.case-study summary:hover{
+  background:var(--surface-3);
+  padding-left:23px;
+}
+details.case-study[open] .case-body{
+  animation:caseReveal .45s cubic-bezier(.22,1,.36,1);
+}
+@keyframes caseReveal{
+  from{opacity:0;transform:translate3d(0,-8px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+.metric .number{transition:transform .35s cubic-bezier(.22,1,.36,1),color .25s ease}
+.metric:hover .number{transform:translateY(-2px)}
+.arch-node{transition:transform .25s cubic-bezier(.22,1,.36,1),border-color .25s ease,box-shadow .25s ease}
+.arch-node:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow-soft)}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+
 @media(max-width:1000px){.process-grid{grid-template-columns:repeat(2,1fr)}.approach{grid-template-columns:repeat(3,1fr)}.approach-step:nth-child(3):after,.approach-step:nth-child(6):after{display:none}.highlight-grid{grid-template-columns:1fr}.work-dashboard{grid-template-columns:1fr}}
 @media(max-width:860px){.nav{padding:8px 0;align-items:flex-start;flex-direction:column}.navlinks{width:100%}.case-search{margin-left:0;width:100%}.metrics{grid-template-columns:repeat(2,1fr)}.case-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.hero-layout{text-align:left}.contacts,.quick-nav{justify-content:flex-start}.work-map{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){header{padding:34px 22px}section{padding:26px 21px}.metrics,.process-grid,.approach,.work-map,.work-stat-row{grid-template-columns:1fr}.approach-step:after{display:none!important}.section-head{display:block}.contact-band{display:block;padding:24px}.contact-band .contacts{justify-content:flex-start;margin-top:15px}.hero-facts{gap:8px}.hero-fact{font-size:12.5px}.navlinks{gap:2px}.navlinks a{padding:7px 8px}}
@@ -368,7 +426,10 @@ footer{text-align:center;color:var(--muted);padding:18px 0 40px;font-size:13px}
 
   // Scroll reveal.
   const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  document.querySelectorAll('.reveal').forEach((el, i)=>{
+    el.style.transitionDelay=(Math.min(i,10)*45)+'ms';
+    observer.observe(el);
+  });
 
   // Case study filtering and searching.
   const cases=[...document.querySelectorAll('.case-study')];
