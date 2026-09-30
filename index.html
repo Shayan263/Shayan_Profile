@@ -118,9 +118,41 @@ details.case-study[open] .case-body{
 @media(max-width:860px){.nav{padding:8px 0;align-items:flex-start;flex-direction:column}.navlinks{width:100%}.case-search{margin-left:0;width:100%}.metrics{grid-template-columns:repeat(2,1fr)}.case-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.hero-layout{text-align:left}.contacts,.quick-nav{justify-content:flex-start}.work-map{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){header{padding:34px 22px}section{padding:26px 21px}.metrics,.process-grid,.approach,.work-map,.work-stat-row{grid-template-columns:1fr}.approach-step:after{display:none!important}.section-head{display:block}.contact-band{display:block;padding:24px}.contact-band .contacts{justify-content:flex-start;margin-top:15px}.hero-facts{gap:8px}.hero-fact{font-size:12.5px}.navlinks{gap:2px}.navlinks a{padding:7px 8px}}
 @media print{nav,.theme-toggle,.quick-nav,.case-toolbar,.expand-row,.scroll-progress{display:none}body{background:#fff}header,section{box-shadow:none;break-inside:avoid}.container{width:100%}}
+
+/* Visitor-intent popup */
+.visitor-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:rgba(7,18,32,.55);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
+.visitor-modal.show{opacity:1;visibility:visible}
+.visitor-dialog{width:min(520px,100%);padding:30px;background:var(--surface);border:1px solid var(--border-strong);border-radius:22px;box-shadow:0 24px 70px rgba(4,18,35,.22);transform:translateY(18px) scale(.98);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.visitor-modal.show .visitor-dialog{transform:translateY(0) scale(1)}
+.visitor-kicker{font-size:11px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.visitor-dialog h2{font-size:27px;margin:0 0 8px}
+.visitor-dialog p{font-size:15px;color:var(--muted);line-height:1.65;margin:0 0 20px}
+.visitor-options{display:grid;grid-template-columns:1fr;gap:10px}
+.visitor-option{width:100%;padding:13px 15px;text-align:left;border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:13px;cursor:pointer;font:inherit;font-size:14px;font-weight:750;transition:transform .2s ease,border-color .2s ease,background-color .2s ease,color .2s ease}
+.visitor-option:hover{transform:translateY(-2px);border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.visitor-option span{display:block;margin-top:2px;font-size:12px;font-weight:500;color:var(--muted)}
+.visitor-option:hover span{color:var(--accent-2)}
+.visitor-note{margin-top:14px!important;margin-bottom:0!important;font-size:11px!important;line-height:1.5!important}
+.visitor-close{display:none}
+@media(max-width:520px){.visitor-dialog{padding:24px 20px}.visitor-dialog h2{font-size:24px}}
+
 </style>
 </head>
-<body id="top"><div class="scroll-progress" id="scrollProgress"></div>
+<body id="top">
+<div class="visitor-modal" id="visitorModal" aria-hidden="true">
+  <div class="visitor-dialog" role="dialog" aria-modal="true" aria-labelledby="visitorTitle">
+    <div class="visitor-kicker">Welcome</div>
+    <h2 id="visitorTitle">What brings you here today?</h2>
+    <p>Select the option that best describes your visit. This helps me understand how people discover my portfolio.</p>
+    <div class="visitor-options">
+      <button class="visitor-option" type="button" data-visitor-type="Recruiter">I'm a Recruiter<span>Reviewing your profile for an SAP opportunity</span></button>
+      <button class="visitor-option" type="button" data-visitor-type="Referral">I'm Looking for a Referral<span>Exploring my profile through a professional connection</span></button>
+      <button class="visitor-option" type="button" data-visitor-type="Exploring">Just Exploring<span>Taking a look at my SAP development work</span></button>
+    </div>
+    <p class="visitor-note">Visit analytics are limited to portfolio usage data such as source, device category and selected visitor type. No name, email address or IP address is collected by the portfolio code.</p>
+  </div>
+</div>
+<div class="scroll-progress" id="scrollProgress"></div>
 <nav><div class="container nav"><div class="brand">Syed Shayan Ali</div><div class="navlinks"><a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#workbench">My Work</a><a href="#case-studies">Case Studies</a><a href="#skills">Technical</a><a href="#education">Education</a></div><button aria-label="Toggle theme" class="theme-toggle" id="themeToggle" type="button">☾ Theme</button></div></nav>
 <main class="container">
 <header class="reveal"><div class="hero-glow"></div><div class="hero-layout">
@@ -415,6 +447,68 @@ details.case-study[open] .case-body{
   const progress=document.getElementById('scrollProgress');
   const updateProgress=()=>{const max=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(max>0?(window.scrollY/max)*100:0)+'%'};
   window.addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
+
+
+  // Visitor-intent popup + optional Google Sheets analytics endpoint.
+  const TRACKING_ENDPOINT = ""; // Set to your deployed Apps Script /exec URL after the sheet is ready.
+  const visitorModal = document.getElementById('visitorModal');
+  const visitorChoices = [...document.querySelectorAll('[data-visitor-type]')];
+  const visitId = sessionStorage.getItem('shayan-visit-id') || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())+'-'+Math.random().toString(36).slice(2));
+  sessionStorage.setItem('shayan-visit-id', visitId);
+
+  function getVisitContext(){
+    const params = new URLSearchParams(window.location.search);
+    let source = (params.get('utm_source') || '').trim().toLowerCase();
+    let refHost = '';
+    try { refHost = document.referrer ? new URL(document.referrer).hostname : ''; } catch(e){}
+    if(!source && refHost.includes('linkedin.com')) source='linkedin';
+    if(!source && refHost) source=refHost.replace(/^www\./,'');
+    if(!source) source='direct';
+    const width=window.innerWidth;
+    const device=width<640?'Mobile':(width<1024?'Tablet':'Desktop');
+    return {
+      visit_id: visitId,
+      event: 'page_view',
+      visitor_type: '',
+      source: source,
+      medium: params.get('utm_medium') || '',
+      campaign: params.get('utm_campaign') || '',
+      device: device,
+      page: window.location.pathname,
+      referrer: refHost,
+      screen_width: String(width)
+    };
+  }
+  function sendTracking(payload){
+    if(!TRACKING_ENDPOINT) return;
+    try{
+      const query=new URLSearchParams(payload).toString();
+      const pixel=new Image();
+      pixel.src=TRACKING_ENDPOINT + (TRACKING_ENDPOINT.includes('?')?'&':'?') + query;
+    }catch(e){}
+  }
+  sendTracking(getVisitContext());
+
+  function openVisitorModal(){
+    if(!visitorModal) return;
+    visitorModal.classList.add('show');
+    visitorModal.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function closeVisitorModal(){
+    if(!visitorModal) return;
+    visitorModal.classList.remove('show');
+    visitorModal.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+  visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
+    const type=btn.dataset.visitorType || 'Exploring';
+    sendTracking({...getVisitContext(),event:'visitor_type',visitor_type:type});
+    closeVisitorModal();
+    try{localStorage.setItem('shayan-visitor-popup-seen','1')}catch(e){}
+  }));
+  const shouldShowPopup=()=>{try{return localStorage.getItem('shayan-visitor-popup-seen')!=='1'}catch(e){return true}};
+  window.addEventListener('load',()=>{if(shouldShowPopup()) setTimeout(openVisitorModal,350)});
 
   // Theme toggle with local persistence.
   const themeToggle=document.getElementById('themeToggle');
