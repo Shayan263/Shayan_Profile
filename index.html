@@ -522,17 +522,26 @@ details.case-study[open] .case-body{
 
   // Theme toggle with local persistence.
   const themeToggle=document.getElementById('themeToggle');
-  const savedTheme=safeGet('localStorage','shayan-theme');
+  let savedTheme='';
+  try{savedTheme=localStorage.getItem('shayan-theme')||''}catch(e){}
   if(savedTheme==='dark') document.body.classList.add('dark');
   const syncThemeLabel=()=>themeToggle.textContent=document.body.classList.contains('dark')?'☀ Light':'☾ Theme';
   syncThemeLabel();
-  themeToggle.addEventListener('click',()=>{document.body.classList.toggle('dark');safeSet('localStorage','shayan-theme',document.body.classList.contains('dark')?'dark':'light');syncThemeLabel()});
+  themeToggle.addEventListener('click',()=>{
+    document.body.classList.toggle('dark');
+    try{localStorage.setItem('shayan-theme',document.body.classList.contains('dark')?'dark':'light')}catch(e){}
+    syncThemeLabel();
+  });
 
   // Scroll reveal.
+  const revealElements=[...document.querySelectorAll('.reveal')];
   const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});
-  document.querySelectorAll('.reveal').forEach((el, i)=>{
+  revealElements.forEach((el, i)=>{
     el.style.transitionDelay=(Math.min(i,10)*45)+'ms';
     observer.observe(el);
+  });
+  window.addEventListener('pageshow',()=>{
+    revealElements.forEach(el=>el.classList.add('visible'));
   });
 
   // Case study filtering and searching.
