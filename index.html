@@ -133,7 +133,7 @@ details.case-study[open] .case-body{
 .visitor-option span{display:block;margin-top:2px;font-size:12px;font-weight:500;color:var(--muted)}
 .visitor-option:hover span{color:var(--accent-2)}
 .visitor-note{margin-top:14px!important;margin-bottom:0!important;font-size:11px!important;line-height:1.5!important}
-.visitor-close{display:none}
+.visitor-details{margin-top:16px;display:grid;gap:8px}.visitor-details[hidden]{display:none}.visitor-details label{font-size:12px;font-weight:750;color:var(--text);margin-top:3px}.visitor-details label span{font-weight:500;color:var(--muted)}.visitor-details input{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:11px;font:inherit;font-size:13px;outline:none;transition:border-color .2s ease,box-shadow .2s ease}.visitor-details input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}.visitor-submit{margin-top:6px;border:0;border-radius:11px;padding:12px 15px;background:var(--accent);color:#fff;font:inherit;font-size:13px;font-weight:800;cursor:pointer;transition:transform .2s ease,opacity .2s ease}.visitor-submit:hover{transform:translateY(-2px);opacity:.92}.visitor-close{display:none}
 @media(max-width:520px){.visitor-dialog{padding:24px 20px}.visitor-dialog h2{font-size:24px}}
 
 </style>
@@ -148,6 +148,13 @@ details.case-study[open] .case-body{
       <button class="visitor-option" type="button" data-visitor-type="Recruiter">I'm a Recruiter<span>Reviewing your profile for an SAP opportunity</span></button>
       <button class="visitor-option" type="button" data-visitor-type="Referral">I'm Looking for a Referral<span>Exploring my profile through a professional connection</span></button>
       <button class="visitor-option" type="button" data-visitor-type="Exploring">Just Exploring<span>Taking a look at my SAP development work</span></button>
+    </div>
+    <div class="visitor-details" id="visitorDetails" hidden>
+      <label for="visitorName">Name <span>(optional)</span></label>
+      <input id="visitorName" type="text" maxlength="100" autocomplete="name" placeholder="Your name">
+      <label for="visitorLocation">Location <span>(optional)</span></label>
+      <input id="visitorLocation" type="text" maxlength="100" autocomplete="address-level2" placeholder="City / Country">
+      <button class="visitor-submit" id="visitorSubmit" type="button">Continue to Portfolio</button>
     </div>
     <p class="visitor-note">Visit analytics are limited to portfolio usage data such as source, device category and selected visitor type. No name, email address or IP address is collected by the portfolio code.</p>
   </div>
@@ -499,11 +506,52 @@ details.case-study[open] .case-body{
     document.body.style.overflow='';
   }
 
-  visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
-    const type=btn.dataset.visitorType || 'Exploring';
-    logToSheet({...getVisitorContext(),event:'portfolio_response',visitor_type:type});
+  const visitorDetails=document.getElementById('visitorDetails');
+  const visitorName=document.getElementById('visitorName');
+  const visitorLocation=document.getElementById('visitorLocation');
+  const visitorSubmit=document.getElementById('visitorSubmit');
+  let selectedVisitorType='';
+
+  // Show the visitor popup only once per browser/device.
+  const visitorCompletedKey='shayanPortfolioVisitorCompleted';
+  const visitorAlreadyCompleted=localStorage.getItem(visitorCompletedKey)==='1';
+
+  function submitVisitorResponse(){
+    const name=(visitorName.value||'').trim();
+    const location=(visitorLocation.value||'').trim();
+
+    logToSheet({
+      ...getVisitorContext(),
+      event:'portfolio_response',
+      visitor_type:selectedVisitorType || 'Exploring',
+      name:name,
+      location:location
+    });
+
+    localStorage.setItem(visitorCompletedKey,'1');
     closeVisitorModal();
+  }
+
+  visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
+    selectedVisitorType=btn.dataset.visitorType || 'Exploring';
+    visitorDetails.hidden=false;
+    visitorChoices.forEach(choice=>choice.style.display='none');
+    visitorName.focus();
   }));
+
+  visitorSubmit.addEventListener('click',submitVisitorResponse);
+
+  visitorName.addEventListener('keydown',e=>{
+    if(e.key==='Enter') visitorLocation.focus();
+  });
+
+  visitorLocation.addEventListener('keydown',e=>{
+    if(e.key==='Enter') submitVisitorResponse();
+  });
+
+  if(visitorAlreadyCompleted){
+    closeVisitorModal();
+  });
 
   // Show the popup on page load.
   function showVisitorPopup(){
