@@ -505,10 +505,9 @@ details.case-study[open] .case-body{
     const type=btn.dataset.visitorType || 'Exploring';
     sendTracking({...getVisitContext(),event:'visitor_type',visitor_type:type});
     closeVisitorModal();
-    try{localStorage.setItem('shayan-visitor-popup-seen','1')}catch(e){}
   }));
-  const shouldShowPopup=()=>{try{return localStorage.getItem('shayan-visitor-popup-seen')!=='1'}catch(e){return true}};
-  window.addEventListener('load',()=>{if(shouldShowPopup()) setTimeout(openVisitorModal,350)});
+  // Show the visitor-intent popup on every fresh portfolio visit.
+  window.addEventListener('load',()=>setTimeout(openVisitorModal,350));
 
   // Theme toggle with local persistence.
   const themeToggle=document.getElementById('themeToggle');
