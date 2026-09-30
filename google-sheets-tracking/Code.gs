@@ -9,7 +9,12 @@ function doGet(e) {
 
   if (!sheet) {
     sheet = ss.insertSheet(VISITS_SHEET);
+  }
+
+  if (sheet.getLastRow() === 0) {
     sheet.appendRow([
+      'Name',
+      'Location',
       'Date',
       'Time',
       'Event',
@@ -20,11 +25,12 @@ function doGet(e) {
     sheet.setFrozenRows(1);
   }
 
-  // Keep only the six fields needed for portfolio analytics.
   const now = new Date();
-  const timezone = ss.getSpreadsheetTimeZone() || Session.getScriptTimeZone() || 'Asia/Kolkata';
+  const timezone = ss.getSpreadsheetTimeZone() || 'Asia/Kolkata';
 
   sheet.appendRow([
+    clean_(params.name),
+    clean_(params.location),
     Utilities.formatDate(now, timezone, 'M/d/yyyy'),
     Utilities.formatDate(now, timezone, 'HH:mm:ss'),
     clean_(params.event),
