@@ -449,9 +449,44 @@ details.case-study[open] .case-body{
   window.addEventListener('scroll',updateProgress,{passive:true}); updateProgress();
 
 
-  // Visitor-intent popup.
+  // Google Sheets response logging.
+  const TRACKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbxzWqUNiNjchKqkkNWzH0bdfE83NAcSdA1pCvowD5ZpCG0FtkIFGeTL2MJu8TcRwl9vcw/exec";
   const visitorModal = document.getElementById('visitorModal');
   const visitorChoices = [...document.querySelectorAll('[data-visitor-type]')];
+
+  function getVisitorContext(){
+    const params = new URLSearchParams(window.location.search);
+    let source = (params.get('utm_source') || '').trim().toLowerCase();
+    let refHost = '';
+    try { refHost = document.referrer ? new URL(document.referrer).hostname : ''; } catch(e){}
+    if(!source && refHost.includes('linkedin.com')) source='linkedin';
+    if(!source && refHost) source=refHost.replace(/^www\./,'');
+    if(!source) source='direct';
+    const width=window.innerWidth;
+    const device=width<640?'Mobile':(width<1024?'Tablet':'Desktop');
+    return {
+      event:'page_view',
+      visitor_type:'',
+      source:source,
+      medium:params.get('utm_medium') || '',
+      campaign:params.get('utm_campaign') || '',
+      device:device,
+      page:window.location.pathname,
+      referrer:refHost,
+      screen_width:String(width)
+    };
+  }
+
+  function logToSheet(data){
+    try{
+      const query=new URLSearchParams(data).toString();
+      const beacon=new Image();
+      beacon.src=TRACKING_ENDPOINT+'?'+query;
+    }catch(e){}
+  }
+
+  // Record the portfolio visit.
+  logToSheet(getVisitorContext());
 
   function openVisitorModal(){
     if(!visitorModal) return;
@@ -468,10 +503,12 @@ details.case-study[open] .case-body{
   }
 
   visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
+    const type=btn.dataset.visitorType || 'Exploring';
+    logToSheet({...getVisitorContext(),event:'visitor_type',visitor_type:type});
     closeVisitorModal();
   }));
 
-  // Show the visitor-intent popup whenever the page finishes loading.
+  // Show the popup on page load.
   function showVisitorPopup(){
     if(!visitorModal) return;
     visitorModal.classList.add('show');
