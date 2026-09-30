@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAP ABAP Developer | Portfolio</title>
+  <meta name="description" content="Professional portfolio and resume of an SAP ABAP Developer.">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111a2e;
+      --text: #e8eefc;
+      --muted: #aab6cf;
+      --accent: #55b7ff;
+      --border: #263451;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #08101d, #101a30);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 1050px; margin: auto; padding: 32px 20px 60px; }
+    header {
+      padding: 48px 36px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(17,26,46,.92);
+      margin-bottom: 24px;
+    }
+    h1 { margin: 0 0 8px; font-size: 42px; }
+    h2 {
+      margin-top: 0;
+      font-size: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    h3 { color: var(--accent); margin-bottom: 4px; }
+    .role { color: var(--accent); font-size: 20px; }
+    .summary { color: var(--muted); max-width: 850px; margin-top: 18px; }
+    .links { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .links a {
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 999px;
+    }
+    .links a:hover { border-color: var(--accent); color: var(--accent); }
+    section {
+      background: rgba(17,26,46,.92);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .skill {
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(8,16,29,.55);
+    }
+    .skill strong { display:block; margin-bottom: 5px; }
+    .muted { color: var(--muted); }
+    ul { padding-left: 22px; }
+    li { margin-bottom: 8px; }
+    .tag {
+      display: inline-block;
+      margin: 4px 4px 4px 0;
+      padding: 5px 9px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    footer { text-align: center; color: var(--muted); padding: 20px; }
+    @media (max-width: 600px) {
+      h1 { font-size: 32px; }
+      header, section { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>Your Name</h1>
+      <div class="role">SAP ABAP Developer | S/4HANA | BTP | Integration</div>
+      <p class="summary">
+        SAP ABAP Developer with 3+ years of experience in SAP S/4HANA implementation
+        projects, RICEFW development, integrations and technical solutions across
+        enterprise business processes.
+      </p>
+      <div class="links">
+        <a href="mailto:YOUR_EMAIL">Email</a>
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/YOUR_GITHUB" target="_blank">GitHub</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Professional Experience</h2>
+      <h3>Deloitte — SAP ABAP Developer</h3>
+      <p class="muted">3+ years | SAP S/4HANA Implementation</p>
+      <ul>
+        <li>Worked on SAP S/4HANA implementation projects and contributed to successful go-lives.</li>
+        <li>Developed and supported RICEFW objects across enterprise business processes.</li>
+        <li>Worked on complex interfaces using OData, IDocs, RFC/BAPI and middleware integrations.</li>
+        <li>Worked with SAP CPI and SAP BTP for integration scenarios between S/4HANA and external systems.</li>
+        <li>Developed CDS views, OData services and RAP-based solutions.</li>
+        <li>Implemented enhancements using BADIs, user exits and implicit enhancements.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <div class="grid">
+        <div class="skill"><strong>ABAP</strong><span class="muted">ABAP on HANA, Reports, Enhancements, BAdIs, User Exits</span></div>
+        <div class="skill"><strong>S/4HANA</strong><span class="muted">RICEFW, CDS Views, APIs, Clean Core concepts</span></div>
+        <div class="skill"><strong>Integration</strong><span class="muted">OData, SAP CPI, IDoc, RFC, BAPI</span></div>
+        <div class="skill"><strong>Modern SAP</strong><span class="muted">SAP BTP, RAP, CDS, Fiori integrations</span></div>
+        <div class="skill"><strong>Data / Tables</strong><span class="muted">BKPF, ACDOCA, VBAK, VBAP, VBPA, KNA1 and related SAP objects</span></div>
+        <div class="skill"><strong>Functional Exposure</strong><span class="muted">MM, SD, FI/FICO, P2P, O2C, R2R, TM, MDG, IBP</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Integration & Development</h2>
+      <div>
+        <span class="tag">OData Services</span>
+        <span class="tag">SAP CPI</span>
+        <span class="tag">SAP BTP</span>
+        <span class="tag">RAP</span>
+        <span class="tag">CDS Views</span>
+        <span class="tag">IDoc</span>
+        <span class="tag">BAPI</span>
+        <span class="tag">RFC</span>
+        <span class="tag">Enhancements</span>
+        <span class="tag">BAdI</span>
+        <span class="tag">User Exit</span>
+        <span class="tag">VOFM Routines</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Project Experience</h2>
+      <h3>SAP S/4HANA Implementation</h3>
+      <ul>
+        <li>Contributed to enterprise S/4HANA implementation activities covering multiple RICEFW requirements.</li>
+        <li>Supported interface development and integration between SAP S/4HANA, SAP CPI and external applications.</li>
+        <li>Worked on sales, procurement, finance and master-data related technical requirements.</li>
+        <li>Participated in testing, defect resolution, deployment and go-live support.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Core SAP Development Areas</h2>
+      <ul>
+        <li>Pricing and VOFM routines</li>
+        <li>Output determination and condition techniques</li>
+        <li>Sales order processing and SD enhancements</li>
+        <li>IDoc configuration and troubleshooting</li>
+        <li>OData and Gateway services</li>
+        <li>CDS views and S/4HANA data modelling</li>
+        <li>RAP application development</li>
+        <li>API and middleware-based integrations</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Education & Certifications</h2>
+      <p>Replace this section with the exact education, certifications and training information from your resume.</p>
+    </section>
+
+    <footer>
+      © 2026 Your Name · SAP ABAP Developer
+    </footer>
+  </div>
+</body>
+</html>
