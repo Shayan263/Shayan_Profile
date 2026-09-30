@@ -453,8 +453,17 @@ details.case-study[open] .case-body{
   const TRACKING_ENDPOINT = ""; // Set to your deployed Apps Script /exec URL after the sheet is ready.
   const visitorModal = document.getElementById('visitorModal');
   const visitorChoices = [...document.querySelectorAll('[data-visitor-type]')];
-  const visitId = sessionStorage.getItem('shayan-visit-id') || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())+'-'+Math.random().toString(36).slice(2));
-  sessionStorage.setItem('shayan-visit-id', visitId);
+
+  // Safe storage helpers so the popup also works when index.html is opened locally.
+  function safeGet(store, key){
+    try{return window[store].getItem(key)}catch(e){return null}
+  }
+  function safeSet(store, key, value){
+    try{window[store].setItem(key,value)}catch(e){}
+  }
+  const existingVisitId=safeGet('sessionStorage','shayan-visit-id');
+  const visitId=existingVisitId || ('visit-'+Date.now()+'-'+Math.random().toString(36).slice(2));
+  safeSet('sessionStorage','shayan-visit-id',visitId);
 
   function getVisitContext(){
     const params = new URLSearchParams(window.location.search);
@@ -506,16 +515,24 @@ details.case-study[open] .case-body{
     sendTracking({...getVisitContext(),event:'visitor_type',visitor_type:type});
     closeVisitorModal();
   }));
-  // Show the visitor-intent popup on every fresh portfolio visit.
-  window.addEventListener('load',()=>setTimeout(openVisitorModal,350));
+  // Show the visitor-intent popup whenever the page finishes loading.
+  function showVisitorPopup(){
+    if(!visitorModal) return;
+    setTimeout(openVisitorModal,350);
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',showVisitorPopup,{once:true});
+  }else{
+    showVisitorPopup();
+  }
 
   // Theme toggle with local persistence.
   const themeToggle=document.getElementById('themeToggle');
-  const savedTheme=localStorage.getItem('shayan-theme');
+  const savedTheme=safeGet('localStorage','shayan-theme');
   if(savedTheme==='dark') document.body.classList.add('dark');
   const syncThemeLabel=()=>themeToggle.textContent=document.body.classList.contains('dark')?'☀ Light':'☾ Theme';
   syncThemeLabel();
-  themeToggle.addEventListener('click',()=>{document.body.classList.toggle('dark');localStorage.setItem('shayan-theme',document.body.classList.contains('dark')?'dark':'light');syncThemeLabel()});
+  themeToggle.addEventListener('click',()=>{document.body.classList.toggle('dark');safeSet('localStorage','shayan-theme',document.body.classList.contains('dark')?'dark':'light');syncThemeLabel()});
 
   // Scroll reveal.
   const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});
