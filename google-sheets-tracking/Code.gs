@@ -1,4 +1,4 @@
-const SPREADSHEET_ID = 'PASTE_YOUR_GOOGLE_SHEET_ID_HERE';
+const SPREADSHEET_ID = '1ZnZvt4ofxm4Nl1tDOD9wqFXALR7x8Ou6791kQ_EnHWQ';
 const VISITS_SHEET = 'Visits';
 
 function doGet(e) {
