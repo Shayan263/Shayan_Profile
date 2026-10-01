@@ -699,3 +699,29 @@ details.case-study summary:hover{
 
   visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
     selectedVisitorType=btn.dataset.visitorType || 'Exploring';
+    if(selectedVisitorType==='Recruiter' || selectedVisitorType==='Referral'){
+      closeVisitorModal();
+      openVisitorDetails();
+    }else{
+      logToSheet({
+        ...getVisitorContext(),
+        event:'portfolio_response',
+        visitor_type:selectedVisitorType,
+        name:'',
+        location:''
+      });
+      try{localStorage.setItem(visitorCompletedKey,'1')}catch(e){}
+      closeVisitorModal();
+    }
+  }));
+
+  if(visitorSubmit){
+    visitorSubmit.addEventListener('click',submitVisitorResponse);
+  }
+
+  if(visitorAlreadyCompleted){
+    closeVisitorModal();
+  }else{
+    openVisitorModal();
+  }
+})();
