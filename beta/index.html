@@ -43,13 +43,13 @@ a{text-decoration:none;color:inherit}.setup{display:none}.setup.show{display:blo
 </section>
 
 <button class="gear" id="settingsBtn">⚙️ GitHub access settings</button>
-<p class="note">Beta control uses the repository's <code>site-status.json</code> flag. Turning the site OFF shows a maintenance screen; your portfolio files remain untouched.</p>
+<p class="note">Beta control changes the portfolio's deployed ON/OFF flag directly in <code>index.html</code>. GitHub Pages may take a few minutes to publish the change.</p>
 </main>
 
 <script>
 const REPO='Shayan263/Shayan_Profile';
-const FILE='site-status.json';
-const RAW='https://raw.githubusercontent.com/Shayan263/Shayan_Profile/main/site-status.json';
+const FILE='index.html';
+const RAW='https://raw.githubusercontent.com/Shayan263/Shayan_Profile/main/index.html';
 const API='https://api.github.com/repos/'+REPO+'/contents/'+FILE;
 const $=id=>document.getElementById(id);
 let online=true;
@@ -61,7 +61,10 @@ async function readStatus(){
   try{
     const r=await fetch(RAW+'?t='+Date.now(),{cache:'no-store'});
     if(!r.ok) throw new Error();
-    const s=await r.json(); online=s.online!==false;
+    const html=await r.text();
+    const match=html.match(/window\\.__PORTFOLIO_ONLINE__\\s*=\\s*(true|false)/);
+    if(!match) throw new Error('Portfolio status marker not found');
+    online=match[1]==='true';
     $('statusText').textContent=online?'Website LIVE':'Website OFF';
     $('status').classList.toggle('off',!online);
     $('toggleBtn').textContent=online?'Turn Website OFF':'Turn Website ON';
@@ -81,15 +84,22 @@ async function setStatus(next){
     const current=await fetch(API+'?ref=main&t='+Date.now(),{headers:{Authorization:'Bearer '+t,Accept:'application/vnd.github+json'},cache:'no-store'});
     if(!current.ok) throw new Error('GitHub access failed ('+current.status+')');
     const data=await current.json();
-    const body=btoa(unescape(encodeURIComponent(JSON.stringify({online:next},null,2))));
+    const decoded=decodeURIComponent(escape(atob(data.content.replace(/\\s/g,''))));
+    const updated=decoded.replace(/window\\.__PORTFOLIO_ONLINE__\\s*=\\s*(true|false)/,'window.__PORTFOLIO_ONLINE__='+(next?'true':'false'));
+    if(updated===decoded) throw new Error('Portfolio status marker not found');
+    const body=btoa(unescape(encodeURIComponent(updated)));
     const put=await fetch(API,{
       method:'PUT',
       headers:{Authorization:'Bearer '+t,Accept:'application/vnd.github+json','Content-Type':'application/json'},
       body:JSON.stringify({message:'Toggle portfolio website '+(next?'ON':'OFF'),content:body,sha:data.sha,branch:'main'})
     });
     if(!put.ok) throw new Error('GitHub update failed ('+put.status+')');
-    await new Promise(r=>setTimeout(r,1200));
-    online=next; await readStatus();
+    online=next;
+    $('statusText').textContent=next?'Website LIVE':'Website OFF';
+    $('status').classList.toggle('off',!next);
+    btn.textContent='Deploying…';
+    await new Promise(r=>setTimeout(r,5000));
+    await readStatus();
   }catch(e){
     btn.disabled=false; btn.textContent='Try again';
     alert(e.message+'\n\nCheck that the token has Contents: Read and write access to Shayan263/Shayan_Profile.');
