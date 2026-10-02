@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio Analytics | Private Dashboard</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<style>
+:root{--bg:#f4f7fb;--surface:#fff;--surface2:#f8fbff;--text:#11213a;--muted:#617087;--accent:#0a6ed1;--soft:#eaf4ff;--border:#d9e3ef;--shadow:0 12px 36px rgba(16,43,78,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}.top{padding:34px 0 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}h1{margin:4px 0 6px;font-size:30px;letter-spacing:-.03em}.sub{margin:0;color:var(--muted);font-size:14px}.date{font-size:13px;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:9px 12px;border-radius:10px}.notice{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);padding:13px 15px;border-radius:12px;margin-bottom:20px;color:var(--muted);font-size:13px}.notice strong{color:var(--text)}.section{margin:26px 0}.section h2{font-size:16px;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.label{font-size:12px;color:var(--muted);font-weight:700}.value{font-size:30px;font-weight:850;letter-spacing:-.03em;margin-top:7px}.small{font-size:11px;color:var(--muted);margin-top:5px}.table{overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:16px}.row{display:grid;grid-template-columns:1.2fr repeat(4,1fr);min-width:680px;padding:13px 16px;border-bottom:1px solid var(--border);font-size:13px}.row:last-child{border-bottom:0}.row.head{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;background:var(--surface2)}.empty{text-align:center;color:var(--muted);padding:28px;font-size:13px}.foot{padding:28px 0 40px;color:var(--muted);font-size:12px}@media(max-width:760px){.top{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:25px}}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.value{font-size:25px}.wrap{width:min(100% - 20px,1180px)}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top">
+<div><div class="eyebrow">Private Analytics</div><h1>Portfolio Dashboard</h1><p class="sub">Recruiter and visitor activity for your SAP ABAP portfolio.</p></div>
+<div class="date" id="todayLabel">Today</div>
+</header>
+<div class="notice"><strong>Private dashboard.</strong> This page is intentionally not linked from the public portfolio. Live event collection will be connected in the next step.</div>
+
+<section class="section"><h2>Today</h2><div class="grid">
+<div class="card"><div class="label">Page visits</div><div class="value" id="todayVisits">0</div><div class="small">All visits today</div></div>
+<div class="card"><div class="label">Unique visitors</div><div class="value" id="todayUnique">0</div><div class="small">Distinct visitors today</div></div>
+<div class="card"><div class="label">Resume downloads</div><div class="value" id="todayResume">0</div><div class="small">Downloads today</div></div>
+<div class="card"><div class="label">Share clicks</div><div class="value" id="todayShares">0</div><div class="small">Share actions today</div></div>
+</div></section>
+
+<section class="section"><h2>Engagement today</h2><div class="grid">
+<div class="card"><div class="label">WhatsApp</div><div class="value" id="todayWhatsapp">0</div><div class="small">Contact clicks</div></div>
+<div class="card"><div class="label">Email</div><div class="value" id="todayEmail">0</div><div class="small">Contact clicks</div></div>
+<div class="card"><div class="label">LinkedIn</div><div class="value" id="todayLinkedin">0</div><div class="small">Contact clicks</div></div>
+<div class="card"><div class="label">QR visits</div><div class="value" id="todayQr">0</div><div class="small">Portfolio QR traffic</div></div>
+</div></section>
+
+<section class="section"><h2>Historical overview</h2><div class="grid">
+<div class="card"><div class="label">Yesterday visits</div><div class="value" id="yVisits">0</div></div>
+<div class="card"><div class="label">Last 7 days</div><div class="value" id="wVisits">0</div><div class="small">Total visits</div></div>
+<div class="card"><div class="label">Last 30 days</div><div class="value" id="mVisits">0</div><div class="small">Total visits</div></div>
+<div class="card"><div class="label">All-time visits</div><div class="value" id="allVisits">0</div></div>
+</div></section>
+
+<section class="section"><h2>Daily activity</h2><div class="table">
+<div class="row head"><div>Date</div><div>Visits</div><div>Unique</div><div>Resume</div><div>Shares</div></div>
+<div class="empty" id="dailyEmpty">No live events yet. The dashboard is ready for the tracking connection.</div>
+</div></section>
+
+<section class="section"><h2>All-time engagement</h2><div class="grid">
+<div class="card"><div class="label">Resume downloads</div><div class="value">0</div></div>
+<div class="card"><div class="label">Share clicks</div><div class="value">0</div></div>
+<div class="card"><div class="label">Contact clicks</div><div class="value">0</div></div>
+<div class="card"><div class="label">QR visits</div><div class="value">0</div></div>
+</div></section>
+<footer class="foot">Dashboard v1 · Tracking storage will be connected separately from the public portfolio.</footer>
+</main>
+<script>
+(function(){
+ const d=new Date();
+ const label=d.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ document.getElementById('todayLabel').textContent=label;
+})();
+</script>
+</body>
+</html>
