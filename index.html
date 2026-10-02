@@ -817,7 +817,66 @@ details.case-study summary:hover{background:var(--accent-soft)}
     portfolioSearchCount.textContent='Type a word to highlight every match.';
   });
 
-  // Track WhatsApp contact clicks in the existing analytics sheet.\n  const whatsappContact=document.querySelector('a[href^="https://wa.me/"]');\n  if(whatsappContact){\n    whatsappContact.addEventListener('click',()=>logToSheet({...getVisitorContext(),event:'whatsapp_click',visitor_type:selectedVisitorType}));\n  }\n\n  // Native portfolio sharing with reliable clipboard fallback.\n  const sharePortfolio=document.getElementById('sharePortfolio');\n  if(sharePortfolio){\n    sharePortfolio.addEventListener('click',async()=>{\n      const label=sharePortfolio.querySelector('span');\n      const shareData={title:document.title,text:'SAP ABAP Developer portfolio of Syed Shayan Ali.',url:window.location.href};\n      const showStatus=(message,delay=1800)=>{\n        if(label) label.textContent=message;\n        window.setTimeout(()=>{if(label) label.textContent='Share Portfolio'},delay);\n      };\n      try{\n        if(typeof navigator.share==='function'){\n          await navigator.share(shareData);\n          logToSheet({...getVisitorContext(),event:'portfolio_share',visitor_type:selectedVisitorType,share_method:'native'});\n          showStatus('Shared');\n          return;\n        }\n      }catch(e){\n        if(e && e.name==='AbortError') return;\n      }\n      try{\n        if(navigator.clipboard && typeof navigator.clipboard.writeText==='function'){\n          await navigator.clipboard.writeText(window.location.href);\n        }else{\n          const input=document.createElement('textarea');\n          input.value=window.location.href; input.setAttribute('readonly','');\n          input.style.position='fixed'; input.style.opacity='0';\n          document.body.appendChild(input); input.select();\n          document.execCommand('copy'); input.remove();\n        }\n        logToSheet({...getVisitorContext(),event:'portfolio_share',visitor_type:selectedVisitorType,share_method:'clipboard'});\n        showStatus('Link Copied');\n      }catch(e){\n        showStatus('Copy Failed',2200);\n      }\n    });\n  }\n\n  // Theme toggle with local persistence.
+  // Track WhatsApp contact clicks in the existing analytics sheet.\n  const whatsappContact=document.querySelector('a[href^="https://wa.me/"]');\n  if(whatsappContact){\n    whatsappContact.addEventListener('click',()=>logToSheet({...getVisitorContext(),event:'whatsapp_click',visitor_type:selectedVisitorType}));\n  }\n\n  // Universal portfolio sharing: native share first, visible fallback menu otherwise.
+  const sharePortfolio=document.getElementById('sharePortfolio');
+  if(sharePortfolio){
+    const shareUrl=window.location.href;
+    const shareText='SAP ABAP Developer portfolio of Syed Shayan Ali.';
+    const closeShareMenu=()=>{
+      const menu=document.getElementById('shareMenu');
+      if(menu) menu.remove();
+    };
+    const copyPortfolioLink=async()=>{
+      try{
+        if(navigator.clipboard && typeof navigator.clipboard.writeText==='function'){
+          await navigator.clipboard.writeText(shareUrl);
+        }else{
+          const input=document.createElement('textarea');
+          input.value=shareUrl; input.setAttribute('readonly','');
+          input.style.position='fixed'; input.style.left='-9999px';
+          document.body.appendChild(input); input.select();
+          document.execCommand('copy'); input.remove();
+        }
+        logToSheet({...getVisitorContext(),event:'portfolio_share',visitor_type:selectedVisitorType,share_method:'clipboard'});
+        const label=sharePortfolio.querySelector('span');
+        if(label){
+          label.textContent='Link Copied';
+          window.setTimeout(()=>label.textContent='Share Portfolio',1800);
+        }
+        closeShareMenu();
+      }catch(e){}
+    };
+    const showShareMenu=()=>{
+      closeShareMenu();
+      const menu=document.createElement('div');
+      menu.id='shareMenu';
+      menu.setAttribute('role','dialog');
+      menu.innerHTML='<a href="https://wa.me/?text='+encodeURIComponent(shareText+' '+shareUrl)+'" target="_blank" rel="noopener">WhatsApp</a><a href="https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(shareUrl)+'" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:?subject='+encodeURIComponent('SAP ABAP Developer Portfolio')+'&body='+encodeURIComponent(shareText+' '+shareUrl)+'">Email</a><button type="button" id="copyShareLink">Copy Link</button>';
+      sharePortfolio.parentElement.appendChild(menu);
+      menu.querySelector('#copyShareLink').addEventListener('click',copyPortfolioLink);
+      document.addEventListener('click',function closeOnOutside(e){
+        if(!menu.contains(e.target) && e.target!==sharePortfolio){
+          closeShareMenu();
+          document.removeEventListener('click',closeOnOutside);
+        }
+      });
+    };
+    sharePortfolio.addEventListener('click',async()=>{
+      const shareData={title:document.title,text:shareText,url:shareUrl};
+      if(typeof navigator.share==='function'){
+        try{
+          await navigator.share(shareData);
+          logToSheet({...getVisitorContext(),event:'portfolio_share',visitor_type:selectedVisitorType,share_method:'native'});
+          return;
+        }catch(e){
+          if(e && e.name==='AbortError') return;
+        }
+      }
+      showShareMenu();
+    });
+  }
+
+  // Theme toggle with local persistence.
   const themeToggle=document.getElementById('themeToggle');
   let savedTheme='';
   try{savedTheme=localStorage.getItem('shayan-theme')||''}catch(e){}
