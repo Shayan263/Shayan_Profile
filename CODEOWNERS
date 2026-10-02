@@ -1,0 +1,11 @@
+# Production and security-sensitive changes require review by the repository owner.
+# GitHub must have "Require review from Code Owners" enabled on the main branch
+# for this file to act as an enforced merge gate.
+
+* @Shayan263
+
+# Extra protection for agent, instruction, prompt, workflow, and repository configuration.
+.github/ @Shayan263
+.github/agents/ @Shayan263
+.github/prompts/ @Shayan263
+.github/workflows/ @Shayan263
