@@ -682,34 +682,21 @@ details.case-study[open] .case-body{
     closeVisitorDetails();
   }
 
+  // Keep the visitor experience to a single popup.
+  // The visitor type is logged immediately; no name/location follow-up is shown.
   visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
     selectedVisitorType=btn.dataset.visitorType || 'Exploring';
     closeVisitorModal();
 
-    if(selectedVisitorType==='Recruiter' || selectedVisitorType==='Referral'){
-      openVisitorDetails();
-    }else{
-      // Exploring does not need the second popup.
-      logToSheet({
-        ...getVisitorContext(),
-        event:'portfolio_response',
-        visitor_type:selectedVisitorType,
-        name:'',
-        location:''
-      });
-      try{localStorage.setItem(visitorCompletedKey,'1')}catch(e){}
-    }
+    logToSheet({
+      ...getVisitorContext(),
+      event:'portfolio_response',
+      visitor_type:selectedVisitorType,
+      name:'',
+      location:''
+    });
+    try{localStorage.setItem(visitorCompletedKey,'1')}catch(e){}
   }));
-
-  visitorSubmit.addEventListener('click',submitVisitorResponse);
-
-  visitorName.addEventListener('keydown',e=>{
-    if(e.key==='Enter') visitorLocation.focus();
-  });
-
-  visitorLocation.addEventListener('keydown',e=>{
-    if(e.key==='Enter') submitVisitorResponse();
-  });
 
   if(visitorAlreadyCompleted){
     closeVisitorModal();
