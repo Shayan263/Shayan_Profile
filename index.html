@@ -8,7 +8,7 @@
 <style>
 :root{
   --bg:#f4f7fb;--surface:#ffffff;--surface-2:#f8fbff;--surface-3:#eef5fc;
-  --text:#11213a;--muted:#617087;--accent:#0a6ed1;--accent-2:#135ca8;
+  --text:#11213a;--muted:#56657a;--accent:#0a6ed1;--accent-2:#135ca8;
   --accent-soft:#eaf4ff;--border:#d9e3ef;--border-strong:#bfd3e8;
   --shadow:0 12px 36px rgba(16,43,78,.08);--shadow-soft:0 6px 18px rgba(16,43,78,.06);
   --radius:20px;--nav-bg:rgba(255,255,255,.86)
@@ -21,7 +21,7 @@ body.dark{
 }
 *{box-sizing:border-box;scroll-behavior:smooth}
 html{scroll-padding-top:84px}
-body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;transition:background .25s,color .25s}
+body{margin:0;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;transition:background .25s,color .25s}
 a{color:var(--accent);text-decoration:none}.container{width:min(1140px,calc(100% - 32px));margin:auto}
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),#7ebcff);z-index:50;transition:width .08s linear}
 nav{position:sticky;top:0;z-index:40;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
@@ -58,7 +58,6 @@ footer{text-align:center;color:var(--muted);padding:18px 0 40px;font-size:13px}
 .hidden{display:none!important}
 
 /* Smooth interaction layer — visual transitions only; page content remains unchanged. */
-html{scroll-behavior:smooth}
 body{transition:background-color .35s ease,color .35s ease}
 header,section,.card,.metric,.case-card,.case-study,.process-card,.skill-group,.work-intro,.work-map-card,.architecture,.approach-step,.cert-feature,.contact-band{
   transition:
