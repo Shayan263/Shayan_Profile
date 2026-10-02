@@ -785,9 +785,14 @@ details.case-study[open] .case-body{
     if(portfolioHits.length) setPortfolioHit(0,true);
   }
 
-  portfolioSearchToggle.addEventListener('click',()=>{
+  portfolioSearchToggle.addEventListener('click',e=>{
+    e.stopPropagation();
     portfolioSearchPanel.classList.toggle('show');
     if(portfolioSearchPanel.classList.contains('show')) portfolioSearch.focus();
+  });
+  portfolioSearchPanel.addEventListener('click',e=>e.stopPropagation());
+  document.addEventListener('click',()=>{
+    if(portfolioSearchPanel.classList.contains('show')) portfolioClose.click();
   });
   portfolioSearch.addEventListener('input',()=>highlightPortfolioMatches(portfolioSearch.value));
   portfolioSearch.addEventListener('keydown',e=>{
