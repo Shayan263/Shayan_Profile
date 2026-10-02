@@ -140,6 +140,48 @@ details.case-study[open] .case-body{
 .resume-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(10,110,209,.24);background:var(--accent-2)}
 .resume-cta:focus-visible{outline:3px solid var(--accent-soft);outline-offset:3px}
 .resume-note{display:block;margin-top:7px;color:var(--muted);font-size:11px}
+
+/* Premium motion layer */
+@keyframes heroRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glowFloat{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-10px,12px,0) scale(1.035)}}
+@keyframes pulseDot{0%,100%{box-shadow:0 0 0 4px rgba(10,110,209,.12)}50%{box-shadow:0 0 0 8px rgba(10,110,209,.04)}}
+@keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+header{isolation:isolate}
+header .hero-main>*{animation:heroRise .7s cubic-bezier(.2,.7,.2,1) both}
+header .hero-main .eyebrow{animation-delay:.05s}
+header .hero-main h1{animation-delay:.12s}
+header .hero-main .hero-divider{animation-delay:.18s}
+header .hero-main .role{animation-delay:.22s}
+header .hero-main .hero-summary{animation-delay:.28s}
+header .hero-main .contacts{animation-delay:.34s}
+header .hero-main .quick-nav{animation-delay:.4s}
+.hero-glow{animation:glowFloat 7s ease-in-out infinite;transform:translate3d(calc(var(--pointer-x,0) * 8px),calc(var(--pointer-y,0) * 8px),0)}
+.hero-side{animation:heroRise .8s .3s cubic-bezier(.2,.7,.2,1) both}
+.eyebrow:before{animation:pulseDot 2.2s ease-in-out infinite}
+section,.card,.skill-group,.case-card,.process-card,.work-map-card,.metric,.approach-step{will-change:transform}
+.card,.skill-group,.case-card,.process-card,.work-map-card,.metric,.approach-step{position:relative;overflow:hidden}
+.card:after,.skill-group:after,.case-card:after,.process-card:after,.work-map-card:after,.metric:after,.approach-step:after{pointer-events:none}
+.card:before,.skill-group:before,.case-card:before,.process-card:before,.work-map-card:before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.18) 50%,transparent 75%);transform:translateX(-130%);transition:transform .65s ease}
+.card:hover:before,.skill-group:hover:before,.case-card:hover:before,.process-card:hover:before,.work-map-card:hover:before{transform:translateX(130%)}
+.card,.skill-group,.case-card,.process-card,.work-map-card,.metric,.approach-step{transition:transform .28s cubic-bezier(.2,.7,.2,1),border-color .28s ease,box-shadow .28s ease}
+.card:hover,.skill-group:hover,.case-card:hover,.process-card:hover,.work-map-card:hover,.metric:hover,.approach-step:hover{transform:translateY(-5px)}
+.reveal.visible{animation:sectionIn .65s cubic-bezier(.2,.7,.2,1) both}
+@keyframes sectionIn{from{opacity:.35;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.arch-node,.pill,.contacts a,.quick-nav a,.filter-btn,.small-action,.theme-toggle{transition:transform .2s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
+.arch-node:hover,.pill:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 16px rgba(10,110,209,.09)}
+.contacts a:hover,.quick-nav a:hover{transform:translateY(-3px)}
+details.case-study summary{transition:background .25s ease,color .25s ease}
+details.case-study summary:hover{background:var(--accent-soft)}
+.flow-step{transition:transform .2s ease,box-shadow .2s ease}
+.flow-step:hover{transform:translateY(-2px);box-shadow:var(--shadow-soft)}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
+}
+@media (max-width:700px){
+  header .hero-main>*{animation-delay:0s}
+  .hero-glow{animation-duration:10s}
+}
+
 </style>
 <style>@media(max-width:900px){.hero-layout{grid-template-columns:1fr;gap:24px}.hero-side{max-width:none}}@media(max-width:700px){header{padding:32px 24px}.hero-layout{grid-template-columns:1fr}.hero-side{padding:17px}h1{font-size:42px}.role{font-size:18px}.hero-summary{font-size:15px}.quick-nav{gap:6px}.quick-nav a{padding:8px 10px}}</style></head>
 <body id="top">
@@ -868,6 +910,19 @@ details.case-study[open] .case-body{
   const sections=[...document.querySelectorAll('section[id],header')];
   const navObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting && entry.target.id){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}})},{rootMargin:'-25% 0px -60% 0px',threshold:0});
   document.querySelectorAll('section[id]').forEach(s=>navObserver.observe(s));
+  // Premium motion interactions.
+  const motionHeader=document.querySelector('header');
+  if(motionHeader && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    motionHeader.addEventListener('pointermove',e=>{
+      const r=motionHeader.getBoundingClientRect();
+      const x=((e.clientX-r.left)/r.width-.5)*2;
+      const y=((e.clientY-r.top)/r.height-.5)*2;
+      motionHeader.style.setProperty('--pointer-x',x.toFixed(3));
+      motionHeader.style.setProperty('--pointer-y',y.toFixed(3));
+    });
+    motionHeader.addEventListener('pointerleave',()=>{motionHeader.style.setProperty('--pointer-x','0');motionHeader.style.setProperty('--pointer-y','0')});
+  }
+
 })();
 </script>
 </main></body></html>
