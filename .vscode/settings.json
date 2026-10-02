@@ -1,0 +1,12 @@
+{
+  "chat.promptFilesRecommendations": {
+    "portfolio-review": true,
+    "recruiter-optimization": true,
+    "sap-technical-review": true,
+    "ui-ux-review": true,
+    "security-check": true,
+    "validate-changes": true,
+    "visitor-tracking-review": true,
+    "portfolio-health-check": true
+  }
+}
