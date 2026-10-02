@@ -1,7 +1,7 @@
 ---
 name: Shayan Portfolio Agent
 description: Maintains and improves Syed Shayan Ali's SAP ABAP/S4HANA portfolio website with strict factual accuracy, safe Git workflow, responsive design, testing, and production safeguards.
-target: github-copilot
+target: vscode
 tools:
   - read
   - edit
