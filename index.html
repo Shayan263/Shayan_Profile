@@ -681,6 +681,11 @@ details.case-study summary:hover{background:var(--accent-soft)}
     document.body.style.overflow='';
   }
 
+  let selectedVisitorType='';
+  const visitorCompletedKey='shayanPortfolioVisitorCompleted';
+  let visitorAlreadyCompleted=false;
+  try{visitorAlreadyCompleted=localStorage.getItem(visitorCompletedKey)==='1'}catch(e){}
+
   // Keep the visitor experience to a single popup.
   // The visitor type is logged immediately; no name/location follow-up is shown.
   visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
