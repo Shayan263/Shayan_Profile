@@ -631,7 +631,7 @@ details.case-study summary:hover{background:var(--accent-soft)}
 <section class="reveal"><div class="grid"><div class="card"><div class="accent-line">Languages</div><strong>English · Hindi</strong></div><div class="card"><div class="accent-line">Interests</div><strong>Cooking · Outdoor Games</strong></div></div></section>
 <section class="reveal"><div class="contact-band"><div><div class="section-kicker" style="color:#9cc9f7">Let's Connect</div><h2 style="color:#fff;margin-bottom:5px">Let's Connect</h2><div class="muted">Interested in discussing SAP ABAP, S/4HANA development, integration or backend opportunities? I'd be happy to connect.</div></div><div class="contact-band-layout"><div><div class="contacts"><a class="contact-link" href="mailto:syedshayan.ali.330@gmail.com?subject=SAP%20ABAP%20Opportunity%20-%20Portfolio%20Website"><svg aria-hidden="true" class="contact-icon" viewBox="0 0 24 24" role="img"><path d="M3 5h18v14H3V5Zm2 2v.4l7 5.1 7-5.1V7l-7 5-7-5Zm0 3.1V17h14v-6.9l-6.41 4.67a1 1 0 0 1-1.18 0L5 10.1Z"/></svg><span>Email</span></a><a class="whatsapp-contact" href="https://wa.me/918249097645?text=Hello%20Shayan%2C%20I%E2%80%99m%20reaching%20out%20regarding%20a%20potential%20SAP%20ABAP%20opportunity.%20Please%20let%20me%20know%20a%20convenient%20time%20to%20connect.%20Thank%20you." rel="noopener" target="_blank"><svg aria-hidden="true" class="whatsapp-icon" viewBox="0 0 24 24" role="img"><path d="M12 2.2a9.8 9.8 0 0 0-8.43 14.8L2.2 21.8l4.94-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.8a8 8 0 0 1-4.08-1.12l-.29-.17-2.93.77.78-2.86-.19-.3A8 8 0 1 1 12 20Zm4.39-5.97c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-1.43-.72-2.37-1.28-3.31-2.9-.25-.43.25-.4.72-1.33.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.31.98 2.47.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/></svg><span>WhatsApp Me</span></a><a class="contact-link" href="https://www.linkedin.com/in/syed-shayan-ali-793152230" rel="noopener" target="_blank"><svg aria-hidden="true" class="contact-icon" viewBox="0 0 24 24" role="img"><path d="M5.1 8.3A1.8 1.8 0 1 0 5.1 4.7a1.8 1.8 0 0 0 0 3.6ZM3.6 9.8h3v9.1h-3V9.8Zm5 0h2.9v1.25h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6v4.81h-3v-4.26c0-1.02-.02-2.33-1.42-2.33-1.42 0-1.64 1.1-1.64 2.26v4.33h-3V9.8Z"/></svg><span>LinkedIn</span></a><button class="share-portfolio" id="sharePortfolio" type="button" aria-label="Share this portfolio"><svg aria-hidden="true" class="contact-icon" viewBox="0 0 24 24" role="img"><path d="M18 16.1c-.77 0-1.46.3-1.99.78L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.02-4.09A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.07 9.79A3 3 0 1 0 9 14.21l7.1 4.19c-.06.19-.1.39-.1.6a3 3 0 1 0 2-2.9Z"/></svg><span>Share Portfolio</span></button></div><div class="contacts" style="margin-top:8px"></div></div><div class="portfolio-qr" aria-label="Portfolio QR code"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=https%3A%2F%2Fshayan263.github.io%2FShayan_Profile%2F%3Futm_source%3Dqr%26utm_medium%3Doffline%26utm_campaign%3Dportfolio_qr" alt="QR code to open Syed Shayan Ali portfolio"/><div><strong>Scan to view portfolio</strong><span>Open the live portfolio instantly from your phone.</span></div></div></div></div></section>
 <footer>© 2026 Syed Shayan Ali · SAP ABAP Developer · <a href="#top">Back to top ↑</a></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 (function(){
   const progress=document.getElementById('scrollProgress');
@@ -642,12 +642,15 @@ details.case-study summary:hover{background:var(--accent-soft)}
   // Supabase analytics. The publishable key is safe in browser code; RLS controls access.
   const SUPABASE_URL = "https://kbzphncscbitgqcdigjv.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ADxqoWQ5ybQ_ahyb1fGQQA_bQLuWstb";
-  let supabaseClient = null;
-  try{
-    if(window.supabase && typeof window.supabase.createClient === 'function'){
-      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-    }
-  }catch(e){ supabaseClient = null; }
+  // Load Supabase only after the portfolio UI is running. Analytics must never block the visitor experience.
+  let supabaseClientPromise = null;
+  function getSupabaseClient(){
+    if(supabaseClientPromise) return supabaseClientPromise;
+    supabaseClientPromise = import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm')
+      .then(({createClient})=>createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY))
+      .catch(()=>null);
+    return supabaseClientPromise;
+  }
   const TRACKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbxzWqUNiNjchKqkkNWzH0bdfE83NAcSdA1pCvowD5ZpCG0FtkIFGeTL2MJu8TcRwl9vcw/exec";
   const visitorModal = document.getElementById('visitorModal');
   const visitorChoices = [...document.querySelectorAll('[data-visitor-type]')];
@@ -694,12 +697,14 @@ details.case-study summary:hover{background:var(--accent-soft)}
 
     // Analytics must never block or delay the portfolio UI.
     try{
-      if(supabaseClient){
-        supabaseClient.from('events').insert({
-          type:payload.event || 'unknown',
-          metadata:payload
-        }).catch(()=>{});
-      }
+      getSupabaseClient().then(client=>{
+        if(client){
+          client.from('events').insert({
+            type:payload.event || 'unknown',
+            metadata:payload
+          }).catch(()=>{});
+        }
+      }).catch(()=>{});
     }catch(e){}
 
     // Keep the existing Google Sheets endpoint as a fallback during the migration.
