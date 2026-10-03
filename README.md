@@ -4,11 +4,12 @@ Welcome to my SAP ABAP development portfolio.
 
 ## Resume / Portfolio Website
 
-👉 **[View my Resume & Portfolio](https://shayan263.github.io/Shayan_Profile/)**
+👉 **[Open `root` branch source](https://github.com/Shayan263/Shayan_Profile/tree/root)**
 
-> For the HTML page to open as a rendered website from GitHub, enable **GitHub Pages** for this repository. The final public website will look like:
->
-> https://shayan263.github.io/Shayan_Profile/
+**Development dashboard source:** [admin.html on `root`](https://github.com/Shayan263/Shayan_Profile/blob/root/admin.html)
+
+> `root` is the development/testing branch. Changes are made and validated there first; `main` is updated only for production deployment.
+
 
 ## About
 
