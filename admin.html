@@ -10,7 +10,7 @@
 <style>
 :root{--bg:#070b14;--panel:#0e1524;--panel2:#111a2c;--text:#eef4ff;--muted:#8b9ab3;--line:rgba(255,255,255,.08);--accent:#61a7ff;--accent2:#8b7cff;--good:#39d98a;--shadow:0 24px 70px rgba(0,0,0,.35)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,rgba(97,167,255,.13),transparent 28%),radial-gradient(circle at 90% 10%,rgba(139,124,255,.12),transparent 25%),var(--bg);color:var(--text);line-height:1.5}.wrap{width:min(1320px,calc(100% - 40px));margin:auto}.top{padding:34px 0 26px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.eyebrow{font-size:11px;font-weight:850;letter-spacing:.16em;text-transform:uppercase;color:#7eb7ff}h1{margin:5px 0 6px;font-size:34px;letter-spacing:-.045em}.sub{margin:0;color:var(--muted);font-size:14px}.date{font-size:12px;color:#b8c5d9;background:rgba(255,255,255,.045);border:1px solid var(--line);padding:9px 12px;border-radius:12px}.notice{background:rgba(255,255,255,.045);border:1px solid var(--line);border-left:3px solid var(--accent);padding:12px 15px;border-radius:14px;margin-bottom:20px;color:var(--muted);font-size:12px;backdrop-filter:blur(14px)}.notice strong{color:var(--text)}.section{margin:28px 0}.section h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:#a9b8ce;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:var(--shadow);backdrop-filter:blur(16px)}.label{font-size:11px;color:var(--muted);font-weight:750;letter-spacing:.04em;text-transform:uppercase}.value{font-size:32px;font-weight:850;letter-spacing:-.04em;margin-top:8px}.small{font-size:11px;color:var(--muted);margin-top:5px}.table{overflow:auto;background:rgba(11,17,29,.92);border:1px solid var(--line);border-radius:18px}.row{display:grid;grid-template-columns:1.2fr repeat(4,1fr);min-width:680px;padding:13px 16px;border-bottom:1px solid var(--line);font-size:13px}.row:last-child{border-bottom:0}.row.head{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;background:rgba(255,255,255,.025)}.empty{text-align:center;color:var(--muted);padding:28px;font-size:13px}.foot{padding:28px 0 40px;color:var(--muted);font-size:12px}.auth{min-height:100vh;display:grid;place-items:center}.login{width:min(420px,calc(100% - 32px));background:rgba(14,21,36,.86);border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 30px 90px rgba(0,0,0,.45);backdrop-filter:blur(18px)}.login h1{font-size:26px}.field{display:block;margin:14px 0}.field span{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px}.field input{width:100%;padding:12px 13px;border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--text);border-radius:11px;font:inherit;outline:none}.field input:focus{border-color:rgba(97,167,255,.65);box-shadow:0 0 0 3px rgba(97,167,255,.1)}.btn{border:0;background:linear-gradient(135deg,#5da8ff,#7f72ff);color:#fff;padding:10px 15px;border-radius:11px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(80,120,255,.22)}.btn.secondary{background:rgba(255,255,255,.045);color:#d8e3f4;border:1px solid var(--line);box-shadow:none}.actions{display:flex;gap:8px;align-items:center}.error{color:#ff8e8e;font-size:13px;margin-top:12px}.hidden{display:none!important}.status{font-size:12px;color:var(--muted);margin-top:10px}.visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.visual-wide{margin-top:14px}.chart-card{min-height:350px}.chart-wrap{height:290px}.chart-card.wide{min-height:360px}.chart-card.wide .chart-wrap{height:300px}.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good);margin-right:7px}.kpi-accent{position:relative;overflow:hidden}.kpi-accent:after{content:"";position:absolute;inset:auto -30px -55px auto;width:130px;height:130px;background:radial-gradient(circle,rgba(97,167,255,.22),transparent 68%);pointer-events:none}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.visual-grid{grid-template-columns:1fr}}@media(max-width:560px){.wrap{width:min(100% - 20px,1320px)}.top{align-items:flex-start;flex-direction:column}h1{font-size:27px}.grid{grid-template-columns:1fr 1fr}.value{font-size:26px}}
-.btn.refreshing{pointer-events:none;opacity:.78;position:relative}.btn.refreshing .refresh-icon{display:inline-block;animation:spin .8s linear infinite}.refresh-icon{display:inline-block;margin-right:6px}@keyframes spin{to{transform:rotate(360deg)}}body.dashboard-refreshing .card,body.dashboard-refreshing .table,body.dashboard-refreshing .notice{animation:dashboardPulse .65s ease both}body.dashboard-refreshing .card{animation-delay:calc(var(--i,0) * 45ms)}body.dashboard-refreshing .visual-wide{animation-delay:.12s}@keyframes dashboardPulse{0%{opacity:.62;transform:translateY(8px) scale(.985);filter:blur(1px)}55%{opacity:1;transform:translateY(-2px) scale(1.005);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:none}}body.dashboard-refreshing .section{animation:sectionIn .75s cubic-bezier(.2,.8,.2,1) both}@keyframes sectionIn{0%{opacity:.55;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}.live-status{display:inline-flex;align-items:center;gap:7px;margin-left:10px;padding:7px 10px;border:1px solid rgba(57,217,138,.2);border-radius:999px;background:rgba(57,217,138,.06);font-size:11px;font-weight:850;letter-spacing:.08em;color:#bff5d7}.live-dot{width:7px;height:7px;border-radius:50%;background:#39d98a;box-shadow:0 0 0 0 rgba(57,217,138,.55);animation:livePulse 1.7s infinite}.live-status.offline{color:#ffb0b0;border-color:rgba(255,100,100,.2);background:rgba(255,100,100,.05)}.live-status.offline .live-dot{background:#ff6b6b;box-shadow:none;animation:none}@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(57,217,138,.55)}70%{box-shadow:0 0 0 8px rgba(57,217,138,0)}100%{box-shadow:0 0 0 0 rgba(57,217,138,0)}}</style>
+.btn.refreshing{pointer-events:none;opacity:.78;position:relative}.btn.refreshing .refresh-icon{display:inline-block;animation:spin .8s linear infinite}.refresh-icon{display:inline-block;margin-right:6px}@keyframes spin{to{transform:rotate(360deg)}}body.dashboard-refreshing .card,body.dashboard-refreshing .table,body.dashboard-refreshing .notice{animation:dashboardPulse .65s ease both}body.dashboard-refreshing .card{animation-delay:calc(var(--i,0) * 45ms)}body.dashboard-refreshing .visual-wide{animation-delay:.12s}@keyframes dashboardPulse{0%{opacity:.62;transform:translateY(8px) scale(.985);filter:blur(1px)}55%{opacity:1;transform:translateY(-2px) scale(1.005);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:none}}body.dashboard-refreshing .section{animation:sectionIn .75s cubic-bezier(.2,.8,.2,1) both}@keyframes sectionIn{0%{opacity:.55;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}.live-status{display:inline-flex;align-items:center;gap:7px;margin-left:10px;padding:7px 10px;border:1px solid rgba(57,217,138,.2);border-radius:999px;background:rgba(57,217,138,.06);font-size:11px;font-weight:850;letter-spacing:.08em;color:#bff5d7}.live-dot{width:7px;height:7px;border-radius:50%;background:#39d98a;box-shadow:0 0 0 0 rgba(57,217,138,.55);animation:livePulse 1.7s infinite}.live-status.offline{color:#ffb0b0;border-color:rgba(255,100,100,.2);background:rgba(255,100,100,.05)}.live-status.offline .live-dot{background:#ff6b6b;box-shadow:none;animation:none}@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(57,217,138,.55)}70%{box-shadow:0 0 0 8px rgba(57,217,138,0)}100%{box-shadow:0 0 0 0 rgba(57,217,138,0)}}.funnel{display:flex;flex-direction:column;gap:8px}.funnel-row{display:grid;grid-template-columns:170px 1fr 70px;align-items:center;gap:12px;font-size:12px}.funnel-track{height:12px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}.funnel-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#61a7ff,#8b7cff)}.heatmap{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;margin-top:12px}.heat-cell{aspect-ratio:1;border-radius:3px;background:rgba(97,167,255,.08);min-width:5px}.heat-cell.active{background:rgba(97,167,255,.2)}.heat-cell.hot{background:rgba(97,167,255,.65)}.heat-label{font-size:9px;color:var(--muted);grid-column:span 24;margin-bottom:2px}.activity-list{display:flex;flex-direction:column}.activity-item{display:flex;justify-content:space-between;gap:15px;padding:11px 0;border-bottom:1px solid var(--line);font-size:12px}.activity-item:last-child{border-bottom:0}.activity-event{font-weight:750}.activity-meta{color:var(--muted)}.insight-card{display:flex;gap:14px;align-items:flex-start}.insight-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:rgba(97,167,255,.12);color:#8fc1ff}.insight-card #portfolioInsight{margin-top:5px;color:#c3cfdf;font-size:13px;line-height:1.7}.event-controls{display:flex;gap:10px}.event-controls select,.event-controls input{padding:10px 12px;border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--text);border-radius:10px;font:inherit}.event-controls input{flex:1}@media(max-width:650px){.funnel-row{grid-template-columns:110px 1fr 50px}.event-controls{flex-direction:column}.heatmap{gap:2px}}</style>
 </head>
 <body>
 <div id="authView" class="auth">
@@ -63,6 +63,47 @@
 
 <section class="section"><h2>Visitor intent</h2>
 <div class="card chart-card"><div class="label">How visitors identified themselves</div><div class="chart-wrap"><canvas id="visitorTypeChart"></canvas></div></div>
+</section>
+
+<section class="section"><h2>Performance intelligence</h2>
+<div class="grid">
+<div class="card kpi-accent"><div class="label">Visit change</div><div class="value" id="visitChange">—</div><div class="small">Today vs yesterday</div></div>
+<div class="card kpi-accent"><div class="label">Resume conversion</div><div class="value" id="resumeConversion">—</div><div class="small">Resume downloads / visits</div></div>
+<div class="card kpi-accent"><div class="label">Engagement rate</div><div class="value" id="engagementRate">—</div><div class="small">Contact + share actions / visits</div></div>
+<div class="card kpi-accent"><div class="label">Top source</div><div class="value" id="topSource" style="font-size:22px">—</div><div class="small" id="topSourceDetail">Traffic source</div></div>
+</div>
+</section>
+
+<section class="section"><h2>Recruiter funnel</h2>
+<div class="card">
+<div class="funnel" id="funnel"></div>
+</div>
+</section>
+
+<section class="section"><h2>Traffic intelligence</h2>
+<div class="visual-grid">
+<div class="card chart-card"><div class="label">Traffic sources · all time</div><div class="chart-wrap"><canvas id="allSourceChart"></canvas></div></div>
+<div class="card chart-card"><div class="label">Campaign performance</div><div class="chart-wrap"><canvas id="campaignChart"></canvas></div></div>
+</div>
+</section>
+
+<section class="section"><h2>Best visiting times</h2>
+<div class="card"><div class="label">Portfolio activity by day and hour</div><div class="heatmap" id="timeHeatmap"></div></div>
+</section>
+
+<section class="section"><h2>Live activity</h2>
+<div class="card"><div id="liveActivity" class="activity-list"></div></div>
+</section>
+
+<section class="section"><h2>Portfolio insights</h2>
+<div class="card insight-card"><div class="insight-icon">✦</div><div><div class="label">Analytics summary</div><div id="portfolioInsight">Loading insights…</div></div></div>
+</section>
+
+<section class="section"><h2>Event explorer</h2>
+<div class="card">
+<div class="event-controls"><select id="eventFilter"><option value="all">All events</option><option value="page_view">Visits</option><option value="portfolio_response">Visitor responses</option><option value="resume_download">Resume</option><option value="linkedin_click">LinkedIn</option><option value="whatsapp_click">WhatsApp</option><option value="email_click">Email</option><option value="portfolio_share">Shares</option></select><input id="eventSearch" placeholder="Search source, campaign or event…"></div>
+<div class="table" style="margin-top:12px"><div class="row head"><div>Time</div><div>Event</div><div>Source</div><div>Campaign</div><div>Visitor</div></div><div id="eventRows"></div></div>
+</div>
 </section>
 
 <section class="section"><h2>Daily activity</h2><div class="table">
@@ -205,13 +246,44 @@ function updateLastUpdated(){
   const stamp=now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   $('status').textContent='Updated at '+stamp;
 }
+function pct(n,d){return d?Math.round(n/d*100):0;}
+function renderIntelligence(events){
+ const visits=events.filter(e=>e.type==='page_view');
+ const today=visits.filter(e=>e.day===todayKey).length;
+ const yesterday=visits.filter(e=>e.day===yesterdayKey).length;
+ const delta=yesterday?Math.round((today-yesterday)/yesterday*100):0;
+ $('visitChange').textContent=(delta>=0?'+':'')+delta+'%';
+ const resumes=countType(events,'resume_download');
+ $('resumeConversion').textContent=pct(resumes,visits.length)+'%';
+ const engagements=events.filter(e=>['whatsapp_click','email_click','linkedin_click','portfolio_share'].includes(e.type)).length;
+ $('engagementRate').textContent=pct(engagements,visits.length)+'%';
+ const sources={};visits.forEach(e=>{const s=e.metadata?.source||'direct';sources[s]=(sources[s]||0)+1;});
+ const top=Object.entries(sources).sort((a,b)=>b[1]-a[1])[0];$('topSource').textContent=top?top[0]:'—';$('topSourceDetail').textContent=top?fmt(top[1])+' visits':'No visits yet';
+ const response=events.filter(e=>e.type==='portfolio_response').length;
+ const stages=[['Portfolio visits',visits.length],['Visitor responses',response],['Resume downloads',resumes],['Contact + shares',engagements]];
+ const max=stages[0][1]||1;$('funnel').innerHTML=stages.map(([name,val])=>'<div class="funnel-row"><div>'+name+'</div><div class="funnel-track"><div class="funnel-fill" style="width:'+Math.min(100,val/max*100)+'%"></div></div><strong>'+fmt(val)+'</strong></div>').join('');
+ const sourceEntries=Object.entries(sources).sort((a,b)=>b[1]-a[1]).slice(0,8);makeHorizontal('allSourceChart','Visits',sourceEntries.map(x=>x[0]),sourceEntries.map(x=>x[1]));
+ const campaigns={};visits.forEach(e=>{const c=e.metadata?.campaign||'';if(c)campaigns[c]=(campaigns[c]||0)+1;});const ce=Object.entries(campaigns).sort((a,b)=>b[1]-a[1]).slice(0,8);makeHorizontal('campaignChart','Visits',ce.map(x=>x[0]),ce.map(x=>x[1]));
+ const hours=Array(168).fill(0);visits.forEach(e=>{const d=new Date(e.created_at);const h=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',hour:'2-digit',hour12:false}).format(d));const day=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',weekday:'short'}).format(d));const map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};hours[(map[day]??0)*24+(h%24)]++;});
+ const mx=Math.max(...hours,1);$('timeHeatmap').innerHTML=hours.map((v,i)=>'<div class="heat-cell '+(v>0?'active ':'')+(v>=mx*.65?'hot':'')+' title="Activity">'+v+'</div>').join('');
+ const latest=[...events].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,8);$('liveActivity').innerHTML=latest.length?latest.map(e=>'<div class="activity-item"><div><div class="activity-event">'+e.type.replaceAll('_',' ')+'</div><div class="activity-meta">'+(e.metadata?.source||'direct')+(e.metadata?.campaign?' · '+e.metadata.campaign:'')+'</div></div><div class="activity-meta">'+new Date(e.created_at).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})+'</div></div>').join(''):'<div class="empty">No activity yet.</div>';
+ const topCampaign=ce[0];$('portfolioInsight').textContent=visits.length?('Your portfolio has '+fmt(visits.length)+' recorded visits. '+(top?'The strongest traffic source is '+top[0]+' with '+fmt(top[1])+' visits. ':'')+(topCampaign?'Campaign '+topCampaign[0]+' currently has '+fmt(topCampaign[1])+' visits. ':'')+'Resume conversion is '+pct(resumes,visits.length)+'%.'):'No analytics data is available yet.';
+}
+function renderEventExplorer(events){
+ const filter=$('eventFilter').value,term=$('eventSearch').value.trim().toLowerCase();
+ const rows=events.filter(e=>(filter==='all'||e.type===filter)&&(!term||JSON.stringify(e.metadata||{}).toLowerCase().includes(term)||e.type.includes(term))).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,100);
+ $('eventRows').innerHTML=rows.map(e=>'<div class="row"><div>'+new Date(e.created_at).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})+'</div><div>'+e.type.replaceAll('_',' ')+'</div><div>'+(e.metadata?.source||'direct')+'</div><div>'+(e.metadata?.campaign||'—')+'</div><div>'+(e.metadata?.visitor_id?e.metadata.visitor_id.slice(0,8):'—')+'</div></div>').join('');
+}
 async function loadDashboard(){
   document.body.classList.add('dashboard-refreshing');
   $('status').textContent='Refreshing analytics…';
   try{
     const events=await fetchEvents();
+    window.__events=events;
     render(events);
     renderCharts(events);
+    renderIntelligence(events);
+    renderEventExplorer(events);
     setLiveStatus(true);
     updateLastUpdated();
   }catch(error){
@@ -239,6 +311,7 @@ $('loginForm').addEventListener('submit',async e=>{
   await showDashboard();
 });
 
+$('eventFilter').addEventListener('change',()=>{if(window.__events)renderEventExplorer(window.__events)}); $('eventSearch').addEventListener('input',()=>{if(window.__events)renderEventExplorer(window.__events)});
 $('refresh').addEventListener('click',async()=>{
   const button=$('refresh');
   const icon=button.querySelector('.refresh-icon');
