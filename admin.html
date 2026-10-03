@@ -27,7 +27,7 @@
 <main id="dashboard" class="wrap hidden">
 <header class="top">
 <div><div class="eyebrow">Private Analytics · Supabase</div><h1>Portfolio Dashboard</h1><p class="sub">Recruiter and visitor activity for your SAP ABAP portfolio.</p></div>
-<div class="actions"><div class="date" id="todayLabel">Today</div><button id="signOut" class="btn secondary">Sign out</button></div>
+<div class="actions"><div class="date" id="todayLabel">Today</div><button id="refresh" class="btn secondary" type="button">Refresh</button><button id="signOut" class="btn secondary">Sign out</button></div>
 </header>
 <div class="notice"><strong>Live tracking connected.</strong> Public portfolio events are stored in <code>public.events</code>; dashboard reads require an authenticated Supabase session.</div>
 
@@ -157,7 +157,7 @@ async function loadDashboard(){
     const events=await fetchEvents();
     render(events);
   }catch(error){
-    $('status').textContent='Could not load events: '+(error.message||'Unknown error');
+    $('status').textContent='Could not load events: '+(error.message||'Unknown error')+(error.details?' · '+error.details:'')+(error.hint?' · '+error.hint:'');
   }
 }
 
@@ -177,6 +177,8 @@ $('loginForm').addEventListener('submit',async e=>{
   if(error){$('loginError').textContent=error.message;return;}
   await showDashboard();
 });
+
+$('refresh').addEventListener('click',()=>loadDashboard());
 
 $('signOut').addEventListener('click',async()=>{
   await supabaseClient.auth.signOut();
