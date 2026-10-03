@@ -642,7 +642,12 @@ details.case-study summary:hover{background:var(--accent-soft)}
   // Supabase analytics. The publishable key is safe in browser code; RLS controls access.
   const SUPABASE_URL = "https://kbzphncscbitgqcdigjv.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ADxqoWQ5ybQ_ahyb1fGQQA_bQLuWstb";
-  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  let supabaseClient = null;
+  try{
+    if(window.supabase && typeof window.supabase.createClient === 'function'){
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    }
+  }catch(e){ supabaseClient = null; }
   const TRACKING_ENDPOINT = "https://script.google.com/macros/s/AKfycbxzWqUNiNjchKqkkNWzH0bdfE83NAcSdA1pCvowD5ZpCG0FtkIFGeTL2MJu8TcRwl9vcw/exec";
   const visitorModal = document.getElementById('visitorModal');
   const visitorChoices = [...document.querySelectorAll('[data-visitor-type]')];
@@ -684,16 +689,17 @@ details.case-study summary:hover{background:var(--accent-soft)}
     }
   }
 
-  async function logToSheet(data){
-    const payload={
-      ...data,
-      visitor_id:getVisitorId()
-    };
+  function logToSheet(data){
+    const payload={...data,visitor_id:getVisitorId()};
+
+    // Analytics must never block or delay the portfolio UI.
     try{
-      await supabaseClient.from('events').insert({
-        type:payload.event || 'unknown',
-        metadata:payload
-      });
+      if(supabaseClient){
+        supabaseClient.from('events').insert({
+          type:payload.event || 'unknown',
+          metadata:payload
+        }).catch(()=>{});
+      }
     }catch(e){}
 
     // Keep the existing Google Sheets endpoint as a fallback during the migration.
