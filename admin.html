@@ -173,10 +173,7 @@ function renderPortfolioHealth(events){
   setHealth("healthAnalytics",true,"Connected");
   const hasEvents=events.length>0;
   setHealth("healthEvents",hasEvents,hasEvents?"Recording":"No events yet");
-  const portfolioLinks={resume:document.querySelector('a[href="resume.pdf"]'),linkedin:document.querySelector('a[href*="linkedin.com/in/"]'),whatsapp:document.querySelector('a[href^="https://wa.me/"]')};
-  setHealth("healthResume",!!portfolioLinks.resume,portfolioLinks.resume?"Available":"Missing");
-  setHealth("healthLinkedin",!!portfolioLinks.linkedin,portfolioLinks.linkedin?"Available":"Missing");
-  setHealth("healthWhatsapp",!!portfolioLinks.whatsapp,portfolioLinks.whatsapp?"Available":"Missing");
+  // Private dashboard: public portfolio link checks are intentionally omitted.
   const last=events[0]?.created_at;
   $("healthMeta").textContent=last?"Last recorded event: "+new Date(last).toLocaleString("en-IN",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",second:"2-digit"}):"No analytics events have been recorded yet.";
 }
