@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio Analytics | Private Dashboard</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#f4f7fb;--surface:#fff;--surface2:#f8fbff;--text:#11213a;--muted:#617087;--accent:#0a6ed1;--soft:#eaf4ff;--border:#d9e3ef;--shadow:0 12px 36px rgba(16,43,78,.08);--danger:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}.top{padding:34px 0 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}h1{margin:4px 0 6px;font-size:30px;letter-spacing:-.03em}.sub{margin:0;color:var(--muted);font-size:14px}.date{font-size:13px;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:9px 12px;border-radius:10px}.notice{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);padding:13px 15px;border-radius:12px;margin-bottom:20px;color:var(--muted);font-size:13px}.notice strong{color:var(--text)}.section{margin:26px 0}.section h2{font-size:16px;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.label{font-size:12px;color:var(--muted);font-weight:700}.value{font-size:30px;font-weight:850;letter-spacing:-.03em;margin-top:7px}.small{font-size:11px;color:var(--muted);margin-top:5px}.table{overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:16px}.row{display:grid;grid-template-columns:1.2fr repeat(4,1fr);min-width:680px;padding:13px 16px;border-bottom:1px solid var(--border);font-size:13px}.row:last-child{border-bottom:0}.row.head{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;background:var(--surface2)}.empty{text-align:center;color:var(--muted);padding:28px;font-size:13px}.foot{padding:28px 0 40px;color:var(--muted);font-size:12px}.auth{min-height:100vh;display:grid;place-items:center}.login{width:min(420px,100%);background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;box-shadow:var(--shadow)}.login h1{font-size:25px}.field{display:block;margin:14px 0}.field span{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px}.field input{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font:inherit}.btn{border:0;background:var(--accent);color:#fff;padding:11px 16px;border-radius:10px;font-weight:800;cursor:pointer}.btn.secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.actions{display:flex;gap:8px;align-items:center}.error{color:var(--danger);font-size:13px;margin-top:12px}.hidden{display:none!important}.status{font-size:12px;color:var(--muted);margin-top:10px}@media(max-width:760px){.top{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:25px}}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.value{font-size:25px}.wrap{width:min(100% - 20px,1180px)}}
+</style>
+</head>
+<body>
+<div id="authView" class="auth">
+  <form id="loginForm" class="login">
+    <div class="eyebrow">Private Analytics</div>
+    <h1>Portfolio Dashboard</h1>
+    <p class="sub">Sign in with the Supabase Auth user you already created.</p>
+    <label class="field"><span>Email</span><input id="email" type="email" autocomplete="username" required></label>
+    <label class="field"><span>Password</span><input id="password" type="password" autocomplete="current-password" required></label>
+    <button class="btn" type="submit">Sign in</button>
+    <div id="loginError" class="error"></div>
+  </form>
+</div>
+
+<main id="dashboard" class="wrap hidden">
+<header class="top">
+<div><div class="eyebrow">Private Analytics · Supabase</div><h1>Portfolio Dashboard</h1><p class="sub">Recruiter and visitor activity for your SAP ABAP portfolio.</p></div>
+<div class="actions"><div class="date" id="todayLabel">Today</div><button id="signOut" class="btn secondary">Sign out</button></div>
+</header>
+<div class="notice"><strong>Live tracking connected.</strong> Public portfolio events are stored in <code>public.events</code>; dashboard reads require an authenticated Supabase session.</div>
+
+<section class="section"><h2>Today</h2><div class="grid">
+<div class="card"><div class="label">Page visits</div><div class="value" id="todayVisits">0</div><div class="small">All visits today</div></div>
+<div class="card"><div class="label">Unique visitors</div><div class="value" id="todayUnique">0</div><div class="small">Distinct anonymous visitor IDs today</div></div>
+<div class="card"><div class="label">Resume downloads</div><div class="value" id="todayResume">0</div><div class="small">Downloads today</div></div>
+<div class="card"><div class="label">Share clicks</div><div class="value" id="todayShares">0</div><div class="small">Share actions today</div></div>
+</div></section>
+
+<section class="section"><h2>Engagement today</h2><div class="grid">
+<div class="card"><div class="label">WhatsApp</div><div class="value" id="todayWhatsapp">0</div><div class="small">Contact clicks</div></div>
+<div class="card"><div class="label">Email</div><div class="value" id="todayEmail">0</div><div class="small">Contact clicks</div></div>
+<div class="card"><div class="label">LinkedIn</div><div class="value" id="todayLinkedin">0</div><div class="small">Contact clicks</div></div>
+<div class="card"><div class="label">QR visits</div><div class="value" id="todayQr">0</div><div class="small">Page visits from QR campaign</div></div>
+</div></section>
+
+<section class="section"><h2>Historical overview</h2><div class="grid">
+<div class="card"><div class="label">Yesterday visits</div><div class="value" id="yVisits">0</div></div>
+<div class="card"><div class="label">Last 7 days</div><div class="value" id="wVisits">0</div><div class="small">Total visits</div></div>
+<div class="card"><div class="label">Last 30 days</div><div class="value" id="mVisits">0</div><div class="small">Total visits</div></div>
+<div class="card"><div class="label">All-time visits</div><div class="value" id="allVisits">0</div></div>
+</div></section>
+
+<section class="section"><h2>Daily activity</h2><div class="table">
+<div class="row head"><div>Date</div><div>Visits</div><div>Unique</div><div>Resume</div><div>Shares</div></div>
+<div id="dailyRows"></div>
+<div class="empty hidden" id="dailyEmpty">No events found.</div>
+</div></section>
+
+<section class="section"><h2>All-time engagement</h2><div class="grid">
+<div class="card"><div class="label">Resume downloads</div><div class="value" id="allResume">0</div></div>
+<div class="card"><div class="label">Share clicks</div><div class="value" id="allShares">0</div></div>
+<div class="card"><div class="label">Contact clicks</div><div class="value" id="allContacts">0</div></div>
+<div class="card"><div class="label">QR visits</div><div class="value" id="allQr">0</div></div>
+</div></section>
+<div id="status" class="status"></div>
+<footer class="foot">Dashboard v2 · Supabase events + Supabase Auth.</footer>
+</main>
+
+<script>
+const SUPABASE_URL="https://kbzphncscbitgqcdigjv.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_ADxqoWQ5ybQ_ahyb1fGQQA_bQLuWstb";
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+
+const $=id=>document.getElementById(id);
+const fmt=n=>Number(n||0).toLocaleString('en-IN');
+const dayKey=d=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(d));
+const prettyDay=k=>new Date(k+'T00:00:00+05:30').toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
+const addDays=(date,n)=>{const d=new Date(date);d.setDate(d.getDate()+n);return d};
+const todayKey=dayKey(new Date());
+const yesterdayKey=dayKey(addDays(new Date(),-1));
+const daysAgo7=dayKey(addDays(new Date(),-6));
+const daysAgo30=dayKey(addDays(new Date(),-29));
+
+$('todayLabel').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+function normalize(row){
+  const m=row.metadata||{};
+  return {type:row.type,metadata:m,created_at:row.created_at,day:dayKey(row.created_at)};
+}
+
+async function fetchEvents(){
+  const all=[];
+  const pageSize=1000;
+  for(let offset=0;offset<10000;offset+=pageSize){
+    const {data,error}=await supabaseClient.from('events').select('id,type,metadata,created_at').order('created_at',{ascending:false}).range(offset,offset+pageSize-1);
+    if(error) throw error;
+    all.push(...(data||[]));
+    if(!data || data.length<pageSize) break;
+  }
+  return all.map(normalize);
+}
+
+function countType(events,type,day){
+  return events.filter(e=>e.type===type && (!day || e.day===day)).length;
+}
+
+function uniqueVisitors(events,day){
+  return new Set(events.filter(e=>e.type==='page_view'&&e.day===day).map(e=>e.metadata?.visitor_id).filter(Boolean)).size;
+}
+
+function render(events){
+  const today=events.filter(e=>e.day===todayKey);
+  $('todayVisits').textContent=fmt(countType(events,'page_view',todayKey));
+  $('todayUnique').textContent=fmt(uniqueVisitors(events,todayKey));
+  $('todayResume').textContent=fmt(countType(events,'resume_download',todayKey));
+  $('todayShares').textContent=fmt(countType(events,'portfolio_share',todayKey));
+  $('todayWhatsapp').textContent=fmt(countType(events,'whatsapp_click',todayKey));
+  $('todayEmail').textContent=fmt(countType(events,'email_click',todayKey));
+  $('todayLinkedin').textContent=fmt(countType(events,'linkedin_click',todayKey));
+  $('todayQr').textContent=fmt(today.filter(e=>e.type==='page_view'&&e.metadata?.source==='qr').length);
+
+  $('yVisits').textContent=fmt(countType(events,'page_view',yesterdayKey));
+  $('wVisits').textContent=fmt(events.filter(e=>e.type==='page_view'&&e.day>=daysAgo7&&e.day<=todayKey).length);
+  $('mVisits').textContent=fmt(events.filter(e=>e.type==='page_view'&&e.day>=daysAgo30&&e.day<=todayKey).length);
+  $('allVisits').textContent=fmt(countType(events,'page_view'));
+
+  $('allResume').textContent=fmt(countType(events,'resume_download'));
+  $('allShares').textContent=fmt(countType(events,'portfolio_share'));
+  $('allContacts').textContent=fmt(events.filter(e=>['whatsapp_click','email_click','linkedin_click'].includes(e.type)).length);
+  $('allQr').textContent=fmt(events.filter(e=>e.type==='page_view'&&e.metadata?.source==='qr').length);
+
+  const byDay={};
+  events.filter(e=>e.type==='page_view').forEach(e=>{
+    if(!byDay[e.day]) byDay[e.day]={visits:0,ids:new Set()};
+    byDay[e.day].visits++;
+    if(e.metadata?.visitor_id) byDay[e.day].ids.add(e.metadata.visitor_id);
+  });
+  events.filter(e=>['resume_download','portfolio_share'].includes(e.type)).forEach(e=>{
+    if(!byDay[e.day]) byDay[e.day]={visits:0,ids:new Set()};
+    if(e.type==='resume_download') byDay[e.day].resume=(byDay[e.day].resume||0)+1;
+    if(e.type==='portfolio_share') byDay[e.day].shares=(byDay[e.day].shares||0)+1;
+  });
+  const keys=Object.keys(byDay).sort((a,b)=>b.localeCompare(a)).slice(0,30);
+  $('dailyRows').innerHTML=keys.map(k=>{
+    const x=byDay[k];
+    return '<div class="row"><div>'+prettyDay(k)+'</div><div>'+fmt(x.visits)+'</div><div>'+fmt(x.ids.size)+'</div><div>'+fmt(x.resume||0)+'</div><div>'+fmt(x.shares||0)+'</div></div>';
+  }).join('');
+  $('dailyEmpty').classList.toggle('hidden',keys.length>0);
+  $('status').textContent='Loaded '+fmt(events.length)+' events.';
+}
+
+async function loadDashboard(){
+  $('status').textContent='Loading events…';
+  try{
+    const events=await fetchEvents();
+    render(events);
+  }catch(error){
+    $('status').textContent='Could not load events: '+(error.message||'Unknown error');
+  }
+}
+
+async function showDashboard(){
+  $('authView').classList.add('hidden');
+  $('dashboard').classList.remove('hidden');
+  await loadDashboard();
+}
+
+$('loginForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  $('loginError').textContent='';
+  const {error}=await supabaseClient.auth.signInWithPassword({
+    email:$('email').value.trim(),
+    password:$('password').value
+  });
+  if(error){$('loginError').textContent=error.message;return;}
+  await showDashboard();
+});
+
+$('signOut').addEventListener('click',async()=>{
+  await supabaseClient.auth.signOut();
+  $('dashboard').classList.add('hidden');
+  $('authView').classList.remove('hidden');
+});
+
+supabaseClient.auth.getSession().then(({data})=>{
+  if(data.session) showDashboard();
+});
+</script>
+</body>
+</html>
