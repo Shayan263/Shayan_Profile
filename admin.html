@@ -293,7 +293,6 @@ $('loginForm').addEventListener('submit',async e=>{
   await showDashboard();
 });
 
-$('eventFilter').addEventListener('change',()=>{if(window.__events)renderEventExplorer(window.__events)}); $('eventSearch').addEventListener('input',()=>{if(window.__events)renderEventExplorer(window.__events)});
 $('refresh').addEventListener('click',async()=>{
   const button=$('refresh');
   const icon=button.querySelector('.refresh-icon');
