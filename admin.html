@@ -8,8 +8,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#f4f7fb;--surface:#fff;--surface2:#f8fbff;--text:#11213a;--muted:#617087;--accent:#0a6ed1;--soft:#eaf4ff;--border:#d9e3ef;--shadow:0 12px 36px rgba(16,43,78,.08);--danger:#b42318}
-*{box-sizing:border-box}body{margin:0;font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}.top{padding:34px 0 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}h1{margin:4px 0 6px;font-size:30px;letter-spacing:-.03em}.sub{margin:0;color:var(--muted);font-size:14px}.date{font-size:13px;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:9px 12px;border-radius:10px}.notice{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);padding:13px 15px;border-radius:12px;margin-bottom:20px;color:var(--muted);font-size:13px}.notice strong{color:var(--text)}.section{margin:26px 0}.section h2{font-size:16px;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.label{font-size:12px;color:var(--muted);font-weight:700}.value{font-size:30px;font-weight:850;letter-spacing:-.03em;margin-top:7px}.small{font-size:11px;color:var(--muted);margin-top:5px}.table{overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:16px}.row{display:grid;grid-template-columns:1.2fr repeat(4,1fr);min-width:680px;padding:13px 16px;border-bottom:1px solid var(--border);font-size:13px}.row:last-child{border-bottom:0}.row.head{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;background:var(--surface2)}.empty{text-align:center;color:var(--muted);padding:28px;font-size:13px}.foot{padding:28px 0 40px;color:var(--muted);font-size:12px}.auth{min-height:100vh;display:grid;place-items:center}.login{width:min(420px,100%);background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;box-shadow:var(--shadow)}.login h1{font-size:25px}.field{display:block;margin:14px 0}.field span{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px}.field input{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font:inherit}.btn{border:0;background:var(--accent);color:#fff;padding:11px 16px;border-radius:10px;font-weight:800;cursor:pointer}.btn.secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}.actions{display:flex;gap:8px;align-items:center}.error{color:var(--danger);font-size:13px;margin-top:12px}.hidden{display:none!important}.status{font-size:12px;color:var(--muted);margin-top:10px}@media(max-width:760px){.top{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:25px}}@media(max-width:430px){.grid{grid-template-columns:1fr 1fr}.value{font-size:25px}.wrap{width:min(100% - 20px,1180px)}}
+:root{--bg:#070b14;--panel:#0e1524;--panel2:#111a2c;--text:#eef4ff;--muted:#8b9ab3;--line:rgba(255,255,255,.08);--accent:#61a7ff;--accent2:#8b7cff;--good:#39d98a;--shadow:0 24px 70px rgba(0,0,0,.35)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,rgba(97,167,255,.13),transparent 28%),radial-gradient(circle at 90% 10%,rgba(139,124,255,.12),transparent 25%),var(--bg);color:var(--text);line-height:1.5}.wrap{width:min(1320px,calc(100% - 40px));margin:auto}.top{padding:34px 0 26px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.eyebrow{font-size:11px;font-weight:850;letter-spacing:.16em;text-transform:uppercase;color:#7eb7ff}h1{margin:5px 0 6px;font-size:34px;letter-spacing:-.045em}.sub{margin:0;color:var(--muted);font-size:14px}.date{font-size:12px;color:#b8c5d9;background:rgba(255,255,255,.045);border:1px solid var(--line);padding:9px 12px;border-radius:12px}.notice{background:rgba(255,255,255,.045);border:1px solid var(--line);border-left:3px solid var(--accent);padding:12px 15px;border-radius:14px;margin-bottom:20px;color:var(--muted);font-size:12px;backdrop-filter:blur(14px)}.notice strong{color:var(--text)}.section{margin:28px 0}.section h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:#a9b8ce;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:var(--shadow);backdrop-filter:blur(16px)}.label{font-size:11px;color:var(--muted);font-weight:750;letter-spacing:.04em;text-transform:uppercase}.value{font-size:32px;font-weight:850;letter-spacing:-.04em;margin-top:8px}.small{font-size:11px;color:var(--muted);margin-top:5px}.table{overflow:auto;background:rgba(11,17,29,.92);border:1px solid var(--line);border-radius:18px}.row{display:grid;grid-template-columns:1.2fr repeat(4,1fr);min-width:680px;padding:13px 16px;border-bottom:1px solid var(--line);font-size:13px}.row:last-child{border-bottom:0}.row.head{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;background:rgba(255,255,255,.025)}.empty{text-align:center;color:var(--muted);padding:28px;font-size:13px}.foot{padding:28px 0 40px;color:var(--muted);font-size:12px}.auth{min-height:100vh;display:grid;place-items:center}.login{width:min(420px,calc(100% - 32px));background:rgba(14,21,36,.86);border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 30px 90px rgba(0,0,0,.45);backdrop-filter:blur(18px)}.login h1{font-size:26px}.field{display:block;margin:14px 0}.field span{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px}.field input{width:100%;padding:12px 13px;border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--text);border-radius:11px;font:inherit;outline:none}.field input:focus{border-color:rgba(97,167,255,.65);box-shadow:0 0 0 3px rgba(97,167,255,.1)}.btn{border:0;background:linear-gradient(135deg,#5da8ff,#7f72ff);color:#fff;padding:10px 15px;border-radius:11px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(80,120,255,.22)}.btn.secondary{background:rgba(255,255,255,.045);color:#d8e3f4;border:1px solid var(--line);box-shadow:none}.actions{display:flex;gap:8px;align-items:center}.error{color:#ff8e8e;font-size:13px;margin-top:12px}.hidden{display:none!important}.status{font-size:12px;color:var(--muted);margin-top:10px}.visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.visual-wide{margin-top:14px}.chart-card{min-height:350px}.chart-wrap{height:290px}.chart-card.wide{min-height:360px}.chart-card.wide .chart-wrap{height:300px}.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good);margin-right:7px}.kpi-accent{position:relative;overflow:hidden}.kpi-accent:after{content:"";position:absolute;inset:auto -30px -55px auto;width:130px;height:130px;background:radial-gradient(circle,rgba(97,167,255,.22),transparent 68%);pointer-events:none}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.visual-grid{grid-template-columns:1fr}}@media(max-width:560px){.wrap{width:min(100% - 20px,1320px)}.top{align-items:flex-start;flex-direction:column}h1{font-size:27px}.grid{grid-template-columns:1fr 1fr}.value{font-size:26px}}
 </style>
 </head>
 <body>
@@ -33,36 +33,36 @@
 <div class="notice"><strong>Live tracking connected.</strong> Public portfolio events are stored in <code>public.events</code>; dashboard reads require an authenticated Supabase session.</div>
 
 <section class="section"><h2>Today</h2><div class="grid">
-<div class="card"><div class="label">Page visits</div><div class="value" id="todayVisits">0</div><div class="small">All visits today</div></div>
-<div class="card"><div class="label">Unique visitors</div><div class="value" id="todayUnique">0</div><div class="small">Distinct anonymous visitor IDs today</div></div>
-<div class="card"><div class="label">Resume downloads</div><div class="value" id="todayResume">0</div><div class="small">Downloads today</div></div>
-<div class="card"><div class="label">Share clicks</div><div class="value" id="todayShares">0</div><div class="small">Share actions today</div></div>
+<div class="card kpi-accent"><div class="label">Page visits</div><div class="value" id="todayVisits">0</div><div class="small">All visits today</div></div>
+<div class="card kpi-accent"><div class="label">Unique visitors</div><div class="value" id="todayUnique">0</div><div class="small">Distinct anonymous visitor IDs today</div></div>
+<div class="card kpi-accent"><div class="label">Resume downloads</div><div class="value" id="todayResume">0</div><div class="small">Downloads today</div></div>
+<div class="card kpi-accent"><div class="label">Share clicks</div><div class="value" id="todayShares">0</div><div class="small">Share actions today</div></div>
 </div></section>
 
 <section class="section"><h2>Engagement today</h2><div class="grid">
-<div class="card"><div class="label">WhatsApp</div><div class="value" id="todayWhatsapp">0</div><div class="small">Contact clicks</div></div>
-<div class="card"><div class="label">Email</div><div class="value" id="todayEmail">0</div><div class="small">Contact clicks</div></div>
-<div class="card"><div class="label">LinkedIn</div><div class="value" id="todayLinkedin">0</div><div class="small">Contact clicks</div></div>
-<div class="card"><div class="label">QR visits</div><div class="value" id="todayQr">0</div><div class="small">Page visits from QR campaign</div></div>
+<div class="card kpi-accent"><div class="label">WhatsApp</div><div class="value" id="todayWhatsapp">0</div><div class="small">Contact clicks</div></div>
+<div class="card kpi-accent"><div class="label">Email</div><div class="value" id="todayEmail">0</div><div class="small">Contact clicks</div></div>
+<div class="card kpi-accent"><div class="label">LinkedIn</div><div class="value" id="todayLinkedin">0</div><div class="small">Contact clicks</div></div>
+<div class="card kpi-accent"><div class="label">QR visits</div><div class="value" id="todayQr">0</div><div class="small">Page visits from QR campaign</div></div>
 </div></section>
 
 <section class="section"><h2>Historical overview</h2><div class="grid">
-<div class="card"><div class="label">Yesterday visits</div><div class="value" id="yVisits">0</div></div>
-<div class="card"><div class="label">Last 7 days</div><div class="value" id="wVisits">0</div><div class="small">Total visits</div></div>
-<div class="card"><div class="label">Last 30 days</div><div class="value" id="mVisits">0</div><div class="small">Total visits</div></div>
-<div class="card"><div class="label">All-time visits</div><div class="value" id="allVisits">0</div></div>
+<div class="card kpi-accent"><div class="label">Yesterday visits</div><div class="value" id="yVisits">0</div></div>
+<div class="card kpi-accent"><div class="label">Last 7 days</div><div class="value" id="wVisits">0</div><div class="small">Total visits</div></div>
+<div class="card kpi-accent"><div class="label">Last 30 days</div><div class="value" id="mVisits">0</div><div class="small">Total visits</div></div>
+<div class="card kpi-accent"><div class="label">All-time visits</div><div class="value" id="allVisits">0</div></div>
 </div></section>
 
 <section class="section"><h2>Visual analytics</h2>
-<div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));">
-<div class="card"><div class="label">Traffic by source · today</div><div style="height:300px"><canvas id="sourceChart"></canvas></div></div>
-<div class="card"><div class="label">Engagement mix · today</div><div style="height:300px"><canvas id="engagementChart"></canvas></div></div>
+<div class="visual-grid">
+<div class="card chart-card"><div class="label">Traffic sources · today</div><div class="chart-wrap"><canvas id="sourceChart"></canvas></div></div>
+<div class="card chart-card"><div class="label">Engagement actions · today</div><div class="chart-wrap"><canvas id="engagementChart"></canvas></div></div>
 </div>
-<div class="card" style="margin-top:14px"><div class="label">Daily visits · last 30 days</div><div style="height:320px"><canvas id="visitsChart"></canvas></div></div>
+<div class="visual-wide card chart-card wide"><div class="label">Traffic pulse · last 30 days</div><div class="chart-wrap"><canvas id="visitsChart"></canvas></div></div>
 </section>
 
-<section class="section"><h2>Visitor types</h2>
-<div class="card"><div style="height:300px"><canvas id="visitorTypeChart"></canvas></div></div>
+<section class="section"><h2>Visitor intent</h2>
+<div class="card chart-card"><div class="label">How visitors identified themselves</div><div class="chart-wrap"><canvas id="visitorTypeChart"></canvas></div></div>
 </section>
 
 <section class="section"><h2>Daily activity</h2><div class="table">
@@ -72,10 +72,10 @@
 </div></section>
 
 <section class="section"><h2>All-time engagement</h2><div class="grid">
-<div class="card"><div class="label">Resume downloads</div><div class="value" id="allResume">0</div></div>
-<div class="card"><div class="label">Share clicks</div><div class="value" id="allShares">0</div></div>
-<div class="card"><div class="label">Contact clicks</div><div class="value" id="allContacts">0</div></div>
-<div class="card"><div class="label">QR visits</div><div class="value" id="allQr">0</div></div>
+<div class="card kpi-accent"><div class="label">Resume downloads</div><div class="value" id="allResume">0</div></div>
+<div class="card kpi-accent"><div class="label">Share clicks</div><div class="value" id="allShares">0</div></div>
+<div class="card kpi-accent"><div class="label">Contact clicks</div><div class="value" id="allContacts">0</div></div>
+<div class="card kpi-accent"><div class="label">QR visits</div><div class="value" id="allQr">0</div></div>
 </div></section>
 <div id="status" class="status"></div>
 <footer class="foot">Dashboard v2 · Supabase events + Supabase Auth.</footer>
@@ -165,42 +165,35 @@ function render(events){
   $('status').textContent='Loaded '+fmt(events.length)+' events.';
 }
 
-function destroyChart(id){
-  const canvas=$(id);
-  if(!canvas) return;
-  const existing=Chart.getChart(canvas);
-  if(existing) existing.destroy();
+function destroyChart(id){const canvas=$(id);if(!canvas)return;const existing=Chart.getChart(canvas);if(existing)existing.destroy();}
+const baseOptions={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#101827',borderColor:'rgba(255,255,255,.1)',borderWidth:1,padding:10}}};
+function makeHorizontal(id,title,labels,values){
+ destroyChart(id);const canvas=$(id);if(!canvas)return;
+ new Chart(canvas,{type:'bar',data:{labels,datasets:[{label:title,data:values,borderRadius:7,barThickness:22}]},options:{...baseOptions,indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:'rgba(255,255,255,.06)'},ticks:{color:'#8b9ab3',precision:0}},y:{grid:{display:false},ticks:{color:'#c4d0e2'}}}}});
 }
-function makePie(id,title,labels,values){
-  destroyChart(id);
-  const canvas=$(id);
-  if(!canvas) return;
-  new Chart(canvas,{type:'pie',data:{labels,datasets:[{data:values}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},title:{display:true,text:title}}}});
+function makeLine(id,labels,values){
+ destroyChart(id);const canvas=$(id);if(!canvas)return;
+ const ctx=canvas.getContext('2d');const gradient=ctx.createLinearGradient(0,0,0,300);gradient.addColorStop(0,'rgba(97,167,255,.28)');gradient.addColorStop(1,'rgba(97,167,255,0)');
+ new Chart(canvas,{type:'line',data:{labels,datasets:[{label:'Visits',data:values,borderWidth:2.5,tension:.38,fill:true,backgroundColor:gradient,pointRadius:3,pointHoverRadius:6}]},options:{...baseOptions,scales:{x:{grid:{display:false},ticks:{color:'#8b9ab3',maxTicksLimit:10}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,.06)'},ticks:{color:'#8b9ab3',precision:0}}}}});
 }
-function makeBar(id,labels,values,title){
-  destroyChart(id);
-  const canvas=$(id);
-  if(!canvas) return;
-  new Chart(canvas,{type:'bar',data:{labels,datasets:[{label:'Visits',data:values}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,ticks:{precision:0}}},plugins:{legend:{display:false},title:{display:true,text:title}}}});
+function makeStacked(id,labels,values){
+ destroyChart(id);const canvas=$(id);if(!canvas)return;
+ const total=values.reduce((a,b)=>a+b,0)||1;
+ const pct=values.map(v=>Math.round(v/total*100));
+ new Chart(canvas,{type:'bar',data:{labels:['Visitor intent'],datasets:labels.map((l,i)=>({label:l,data:[pct[i]],stack:'intent',borderWidth:0}))},options:{...baseOptions,indexAxis:'y',scales:{x:{stacked:true,min:0,max:100,grid:{display:false},ticks:{color:'#8b9ab3',callback:v=>v+'%'}},y:{stacked:true,display:false}},plugins:{legend:{display:true,position:'bottom',labels:{color:'#c4d0e2',usePointStyle:true,padding:18}}}}});
 }
 function renderCharts(events){
-  const today=events.filter(e=>e.day===todayKey);
-  const source={}; today.filter(e=>e.type==='page_view').forEach(e=>{const s=e.metadata?.source||'direct';source[s]=(source[s]||0)+1;});
-  const sourceEntries=Object.entries(source).sort((a,b)=>b[1]-a[1]);
-  makePie('sourceChart','Traffic source today',sourceEntries.map(x=>x[0]),sourceEntries.map(x=>x[1]));
-
-  const engagementTypes=[['WhatsApp','whatsapp_click'],['Email','email_click'],['LinkedIn','linkedin_click'],['Resume','resume_download'],['Share','portfolio_share']];
-  makePie('engagementChart','Engagement actions today',engagementTypes.map(x=>x[0]),engagementTypes.map(x=>countType(events,x[1],todayKey)));
-
-  const byDay={}; events.filter(e=>e.type==='page_view'&&e.day>=daysAgo30&&e.day<=todayKey).forEach(e=>byDay[e.day]=(byDay[e.day]||0)+1);
-  const days=Object.keys(byDay).sort();
-  makeBar('visitsChart',days.map(prettyDay),days.map(d=>byDay[d]),'Portfolio visits');
-
-  const types={Recruiter:0,Referral:0,Exploring:0};
-  events.filter(e=>e.type==='portfolio_response').forEach(e=>{const t=e.metadata?.visitor_type;if(t) types[t]=(types[t]||0)+1;});
-  makePie('visitorTypeChart','Visitor intent · all recorded responses',Object.keys(types),Object.values(types));
+ const today=events.filter(e=>e.day===todayKey);
+ const source={};today.filter(e=>e.type==='page_view').forEach(e=>{const s=e.metadata?.source||'direct';source[s]=(source[s]||0)+1;});
+ const se=Object.entries(source).sort((a,b)=>b[1]-a[1]);
+ makeHorizontal('sourceChart','Visits',se.map(x=>x[0]),se.map(x=>x[1]));
+ const engagement=[['WhatsApp','whatsapp_click'],['Email','email_click'],['LinkedIn','linkedin_click'],['Resume','resume_download'],['Share','portfolio_share']];
+ makeHorizontal('engagementChart','Actions',engagement.map(x=>x[0]),engagement.map(x=>countType(events,x[1],todayKey)));
+ const byDay={};events.filter(e=>e.type==='page_view'&&e.day>=daysAgo30&&e.day<=todayKey).forEach(e=>byDay[e.day]=(byDay[e.day]||0)+1);
+ const days=Object.keys(byDay).sort();makeLine('visitsChart',days.map(prettyDay),days.map(d=>byDay[d]));
+ const types={Recruiter:0,Referral:0,Exploring:0};events.filter(e=>e.type==='portfolio_response').forEach(e=>{const t=e.metadata?.visitor_type;if(t)types[t]=(types[t]||0)+1;});
+ makeStacked('visitorTypeChart',Object.keys(types),Object.values(types));
 }
-
 async function loadDashboard(){
   $('status').textContent='Loading events…';
   try{
