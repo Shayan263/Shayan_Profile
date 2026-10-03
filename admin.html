@@ -10,7 +10,7 @@
 <style>
 :root{--bg:#070b14;--panel:#0e1524;--panel2:#111a2c;--text:#eef4ff;--muted:#8b9ab3;--line:rgba(255,255,255,.08);--accent:#61a7ff;--accent2:#8b7cff;--good:#39d98a;--shadow:0 24px 70px rgba(0,0,0,.35)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,rgba(97,167,255,.13),transparent 28%),radial-gradient(circle at 90% 10%,rgba(139,124,255,.12),transparent 25%),var(--bg);color:var(--text);line-height:1.5}.wrap{width:min(1320px,calc(100% - 40px));margin:auto}.top{padding:34px 0 26px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.eyebrow{font-size:11px;font-weight:850;letter-spacing:.16em;text-transform:uppercase;color:#7eb7ff}h1{margin:5px 0 6px;font-size:34px;letter-spacing:-.045em}.sub{margin:0;color:var(--muted);font-size:14px}.date{font-size:12px;color:#b8c5d9;background:rgba(255,255,255,.045);border:1px solid var(--line);padding:9px 12px;border-radius:12px}.notice{background:rgba(255,255,255,.045);border:1px solid var(--line);border-left:3px solid var(--accent);padding:12px 15px;border-radius:14px;margin-bottom:20px;color:var(--muted);font-size:12px;backdrop-filter:blur(14px)}.notice strong{color:var(--text)}.section{margin:28px 0}.section h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:#a9b8ce;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:var(--shadow);backdrop-filter:blur(16px)}.label{font-size:11px;color:var(--muted);font-weight:750;letter-spacing:.04em;text-transform:uppercase}.value{font-size:32px;font-weight:850;letter-spacing:-.04em;margin-top:8px}.small{font-size:11px;color:var(--muted);margin-top:5px}.table{overflow:auto;background:rgba(11,17,29,.92);border:1px solid var(--line);border-radius:18px}.row{display:grid;grid-template-columns:1.2fr repeat(4,1fr);min-width:680px;padding:13px 16px;border-bottom:1px solid var(--line);font-size:13px}.row:last-child{border-bottom:0}.row.head{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;background:rgba(255,255,255,.025)}.empty{text-align:center;color:var(--muted);padding:28px;font-size:13px}.foot{padding:28px 0 40px;color:var(--muted);font-size:12px}.auth{min-height:100vh;display:grid;place-items:center}.login{width:min(420px,calc(100% - 32px));background:rgba(14,21,36,.86);border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:0 30px 90px rgba(0,0,0,.45);backdrop-filter:blur(18px)}.login h1{font-size:26px}.field{display:block;margin:14px 0}.field span{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px}.field input{width:100%;padding:12px 13px;border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--text);border-radius:11px;font:inherit;outline:none}.field input:focus{border-color:rgba(97,167,255,.65);box-shadow:0 0 0 3px rgba(97,167,255,.1)}.btn{border:0;background:linear-gradient(135deg,#5da8ff,#7f72ff);color:#fff;padding:10px 15px;border-radius:11px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(80,120,255,.22)}.btn.secondary{background:rgba(255,255,255,.045);color:#d8e3f4;border:1px solid var(--line);box-shadow:none}.actions{display:flex;gap:8px;align-items:center}.error{color:#ff8e8e;font-size:13px;margin-top:12px}.hidden{display:none!important}.status{font-size:12px;color:var(--muted);margin-top:10px}.visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.visual-wide{margin-top:14px}.chart-card{min-height:350px}.chart-wrap{height:290px}.chart-card.wide{min-height:360px}.chart-card.wide .chart-wrap{height:300px}.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 12px var(--good);margin-right:7px}.kpi-accent{position:relative;overflow:hidden}.kpi-accent:after{content:"";position:absolute;inset:auto -30px -55px auto;width:130px;height:130px;background:radial-gradient(circle,rgba(97,167,255,.22),transparent 68%);pointer-events:none}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.visual-grid{grid-template-columns:1fr}}@media(max-width:560px){.wrap{width:min(100% - 20px,1320px)}.top{align-items:flex-start;flex-direction:column}h1{font-size:27px}.grid{grid-template-columns:1fr 1fr}.value{font-size:26px}}
-</style>
+.btn.refreshing{pointer-events:none;opacity:.78;position:relative}.btn.refreshing .refresh-icon{display:inline-block;animation:spin .8s linear infinite}.refresh-icon{display:inline-block;margin-right:6px}@keyframes spin{to{transform:rotate(360deg)}}</style>
 </head>
 <body>
 <div id="authView" class="auth">
@@ -28,7 +28,7 @@
 <main id="dashboard" class="wrap hidden">
 <header class="top">
 <div><div class="eyebrow">Private Analytics · Supabase</div><h1>Portfolio Dashboard</h1><p class="sub">Recruiter and visitor activity for your SAP ABAP portfolio.</p></div>
-<div class="actions"><div class="date" id="todayLabel">Today</div><button id="refresh" class="btn secondary" type="button">Refresh</button><button id="signOut" class="btn secondary">Sign out</button></div>
+<div class="actions"><div class="date" id="todayLabel">Today</div><button id="refresh" class="btn secondary" type="button"><span class="refresh-icon">↻</span><span class="refresh-label">Refresh</span></button><button id="signOut" class="btn secondary">Sign out</button></div>
 </header>
 <div class="notice"><strong>Live tracking connected.</strong> Public portfolio events are stored in <code>public.events</code>; dashboard reads require an authenticated Supabase session.</div>
 
@@ -222,7 +222,19 @@ $('loginForm').addEventListener('submit',async e=>{
   await showDashboard();
 });
 
-$('refresh').addEventListener('click',()=>loadDashboard());
+$('refresh').addEventListener('click',async()=>{
+  const button=$('refresh');
+  const icon=button.querySelector('.refresh-icon');
+  const label=button.querySelector('.refresh-label');
+  button.classList.add('refreshing');
+  icon.textContent='↻';
+  label.textContent='Refreshing…';
+  try{await loadDashboard();}finally{
+    icon.textContent='✓';
+    label.textContent='Updated';
+    setTimeout(()=>{button.classList.remove('refreshing');icon.textContent='↻';label.textContent='Refresh';},900);
+  }
+});
 
 $('signOut').addEventListener('click',async()=>{
   await supabaseClient.auth.signOut();
