@@ -712,13 +712,16 @@ details.case-study summary:hover{background:var(--accent-soft)}
     // Analytics must never block or delay the portfolio UI.
     try{
       getSupabaseClient().then(client=>{
-        if(client){
-          client.from('events').insert({
-            type:payload.event || 'unknown',
-            metadata:payload
-          }).catch(()=>{});
-        }
-      }).catch(()=>{});
+        if(!client) return;
+        return client.from('events').insert({
+          type:payload.event || 'unknown',
+          metadata:payload
+        }).then(({error})=>{
+          if(error) console.warn('[Portfolio Analytics] Supabase insert failed:', error.message, error.details || '', error.hint || '');
+        });
+      }).catch(error=>{
+        console.warn('[Portfolio Analytics] Supabase client failed:', error?.message || error);
+      });
     }catch(e){}
 
     // Keep the existing Google Sheets endpoint as a fallback during the migration.
