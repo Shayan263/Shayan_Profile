@@ -2,14 +2,12 @@
 
 Welcome to my SAP ABAP development portfolio.
 
-## Resume / Portfolio Website
+## Root Branch — Development Links
 
-👉 **[Open `root` branch source](https://github.com/Shayan263/Shayan_Profile/tree/root)**
+- 🌐 **[Website — root branch](https://github.com/Shayan263/Shayan_Profile/tree/root)**
+- 📊 **[Dashboard — root branch](https://github.com/Shayan263/Shayan_Profile/blob/root/admin.html)**
 
-**Development dashboard source:** [admin.html on `root`](https://github.com/Shayan263/Shayan_Profile/blob/root/admin.html)
-
-> `root` is the development/testing branch. Changes are made and validated there first; `main` is updated only for production deployment.
-
+> `root` is the development/testing branch. Changes are made and validated here first. `main` is reserved for production deployment.
 
 ## About
 
