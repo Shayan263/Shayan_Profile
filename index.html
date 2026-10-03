@@ -881,7 +881,9 @@ details.case-study summary:hover{background:var(--accent-soft)}
 
   document.querySelectorAll('a[href="resume.pdf"]').forEach(link=>{
     link.addEventListener('click',()=>logToSheet({...getVisitorContext(),event:'resume_download',visitor_type:selectedVisitorType}));
-  });\n\n  // Direct portfolio share chooser. Native sharing is optional; visible choices always work.
+  });
+
+  // Direct portfolio share chooser. Native sharing is optional; visible choices always work.
   const sharePortfolio=document.getElementById('sharePortfolio');
   if(sharePortfolio){
     sharePortfolio.addEventListener('click',(event)=>{
