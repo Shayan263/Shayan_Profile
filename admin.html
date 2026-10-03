@@ -268,7 +268,7 @@ async function loadDashboard(){
     render(events);
     renderCharts(events);
     renderIntelligence(events);
-    renderEventExplorer(events);
+    if($('eventRows')) renderEventExplorer(events);
     setLiveStatus(true);
     updateLastUpdated();
   }catch(error){
@@ -323,3 +323,27 @@ supabaseClient.auth.getSession().then(({data})=>{
 </script>
 </body>
 </html>
+<script>
+// Resilient dashboard health check: retry Supabase connectivity automatically.
+let dashboardRetryTimer=null;
+let dashboardRetryDelay=15000;
+function scheduleDashboardRetry(){
+  if(dashboardRetryTimer) clearTimeout(dashboardRetryTimer);
+  dashboardRetryTimer=setTimeout(async()=>{
+    await loadDashboard();
+    dashboardRetryDelay=15000;
+    if($('liveStatus')?.classList.contains('offline')){
+      dashboardRetryDelay=30000;
+      scheduleDashboardRetry();
+    }
+  },dashboardRetryDelay);
+}
+const originalLoadDashboard=loadDashboard;
+loadDashboard=async function(){
+  try{ await originalLoadDashboard(); }
+  finally{
+    if($('liveStatus')?.classList.contains('offline')) scheduleDashboardRetry();
+    else if(dashboardRetryTimer){clearTimeout(dashboardRetryTimer);dashboardRetryTimer=null;}
+  }
+};
+</script>
