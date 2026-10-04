@@ -744,15 +744,20 @@ details.case-study summary:hover{background:var(--accent-soft)}
   let visitorAlreadyCompleted=false;
   try{visitorAlreadyCompleted=localStorage.getItem(visitorCompletedKey)==='1'}catch(e){}
 
-  // Record one page-view event for every visit.
-  logToSheet(getVisitorContext());
+  // Analytics is gated by the visitor choice. Returning visitors who have
+  // already made the choice can continue to receive page-view analytics.
+  if(visitorAlreadyCompleted){
+    logToSheet(getVisitorContext());
+  }
 
   // Keep the visitor experience to a single popup.
-  // The visitor type is logged immediately; no name/location follow-up is shown.
+  // The visitor type is logged immediately after the visitor makes an explicit choice.
   visitorChoices.forEach(btn=>btn.addEventListener('click',()=>{
     selectedVisitorType=btn.dataset.visitorType || 'Exploring';
     closeVisitorModal();
 
+    // Initialize analytics only after an explicit visitor choice.
+    logToSheet(getVisitorContext());
     logToSheet({
       ...getVisitorContext(),
       event:'portfolio_response',
