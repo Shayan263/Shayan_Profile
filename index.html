@@ -193,7 +193,52 @@ details.case-study summary:hover{background:var(--accent-soft)}
 .nav-dashboard{font-weight:800;text-decoration:none;color:inherit;padding:7px 11px;border:1px solid rgba(10,110,209,.25);border-radius:10px;background:rgba(10,110,209,.06)}.nav-dashboard:hover{background:rgba(10,110,209,.12)}
 .sap-test-logo{display:inline-flex;align-items:center;justify-content:center;width:46px;height:24px;background:#0a6ed1;color:#fff;font-weight:900;font-size:13px;letter-spacing:-.04em;transform:skew(-8deg);border-radius:2px;box-shadow:0 4px 10px rgba(10,110,209,.18)}.sap-test-logo span{transform:skew(8deg)}
 </style>
-<style>@media(max-width:900px){.hero-layout{grid-template-columns:1fr;gap:24px}.hero-side{max-width:none}}@media(max-width:700px){header{padding:32px 24px}.hero-layout{grid-template-columns:1fr}.hero-side{padding:17px}h1{font-size:42px}.role{font-size:18px}.hero-summary{font-size:15px}.quick-nav{gap:6px}.quick-nav a{padding:8px 10px}.hero-impact{grid-template-columns:1fr 1fr}.hero-impact-card:last-child{grid-column:1/-1}}</style></head>
+<style>@media(max-width:900px){.hero-layout{grid-template-columns:1fr;gap:24px}.hero-side{max-width:none}}@media(max-width:700px){header{padding:32px 24px}.hero-layout{grid-template-columns:1fr}.hero-side{padding:17px}h1{font-size:42px}.role{font-size:18px}.hero-summary{font-size:15px}.quick-nav{gap:6px}.quick-nav a{padding:8px 10px}.hero-impact{grid-template-columns:1fr 1fr}.hero-impact-card:last-child{grid-column:1/-1}}</style><style>
+/* Resume Builder */
+#resume-builder{scroll-margin-top:100px}
+.rb-layout{display:grid;grid-template-columns:minmax(300px,.82fr) minmax(420px,1.18fr);gap:18px}
+.rb-panel,.rb-preview{border:1px solid var(--border);border-radius:18px;background:var(--surface-2);padding:20px}
+.rb-panel h3,.rb-preview h3{margin-bottom:5px}
+.rb-sub{font-size:12px;color:var(--muted);margin-bottom:16px}
+.rb-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rb-field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.rb-field.full{grid-column:1/-1}
+.rb-field label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.rb-field input,.rb-field textarea{width:100%;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);padding:10px 11px;font:inherit;font-size:13px;outline:none}
+.rb-field textarea{min-height:82px;resize:vertical}
+.rb-field input:focus,.rb-field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.rb-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.rb-btn{border:1px solid var(--border);background:var(--surface);color:var(--text);padding:9px 12px;border-radius:10px;cursor:pointer;font:700 12px inherit}
+.rb-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.rb-btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-soft)}
+.rb-exp{border:1px solid var(--border);border-radius:12px;padding:12px;margin-top:10px;background:var(--surface)}
+.rb-exp-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.rb-exp-head strong{font-size:12px}
+.rb-remove{border:0;background:none;color:#b44;cursor:pointer;font-size:11px}
+.rb-paper{background:#fff;color:#172338;border:1px solid #d7dee8;border-radius:6px;padding:34px;min-height:700px;box-shadow:0 12px 28px rgba(16,43,78,.08)}
+.rb-paper h1{font-size:30px;letter-spacing:-.8px;color:#172338;margin:0}
+.rb-paper .rb-role{font-size:15px;color:#0a6ed1;font-weight:750;margin-top:4px}
+.rb-contact{font-size:10.5px;color:#59677a;margin-top:7px}
+.rb-paper section{border:0;box-shadow:none;border-radius:0;padding:0;margin:20px 0 0;background:transparent}
+.rb-paper section h2{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#0a6ed1;border-bottom:1px solid #dbe3ec;padding-bottom:5px;margin-bottom:8px}
+.rb-paper p,.rb-paper li{font-size:11px;line-height:1.55;color:#344257}
+.rb-paper ul{margin:5px 0;padding-left:18px}
+.rb-paper .rb-job{margin-bottom:12px}
+.rb-paper .rb-jobtop{display:flex;justify-content:space-between;gap:12px;font-size:11.5px;font-weight:800;color:#172338}
+.rb-paper .rb-muted{font-size:10.5px;color:#68778b}
+.rb-status{font-size:11px;color:var(--muted);margin-top:9px}
+@media(max-width:900px){.rb-layout{grid-template-columns:1fr}.rb-paper{min-height:auto}}
+@media(max-width:560px){.rb-grid{grid-template-columns:1fr}.rb-field.full{grid-column:auto}.rb-paper{padding:22px}.rb-paper .rb-jobtop{display:block}}
+@media print{
+  body>*{visibility:hidden!important}
+  #resume-builder,#resume-builder *{visibility:visible!important}
+  #resume-builder{position:absolute;left:0;top:0;width:100%;margin:0;padding:0;background:#fff!important;border:0!important;box-shadow:none!important}
+  #resume-builder>.section-head,.rb-panel,.rb-status{display:none!important}
+  #resume-builder .rb-layout{display:block}
+  #resume-builder .rb-preview{border:0;padding:0;background:#fff}
+  #resume-builder .rb-paper{box-shadow:none;border:0;border-radius:0;min-height:0}
+}
+</style></head>
 <body id="top">
 <div class="visitor-modal" id="visitorModal" aria-hidden="true">
   <div class="visitor-dialog" role="dialog" aria-modal="true" aria-labelledby="visitorTitle">
@@ -210,7 +255,7 @@ details.case-study summary:hover{background:var(--accent-soft)}
 </div>
 
 <div class="scroll-progress" id="scrollProgress"></div><div class="portfolio-search-panel" id="portfolioSearchPanel" role="search"><div class="portfolio-search-row"><input class="portfolio-search" id="portfolioSearch" type="search" placeholder="Search anything in the portfolio…" aria-label="Search portfolio content"><div class="portfolio-search-actions"><button id="portfolioPrev" type="button" aria-label="Previous match">↑</button><button id="portfolioNext" type="button" aria-label="Next match">↓</button><button id="portfolioClose" type="button" aria-label="Close search">×</button></div></div><div class="portfolio-search-count" id="portfolioSearchCount">Search the portfolio — every match will be highlighted.</div></div>
-<nav><div class="container nav"><div class="brand"><span class="sap-test-logo" aria-label="SAP logo" title="SAP"><span>SAP</span></span> SAP ABAP Developer</div><div class="navlinks"><a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#workbench">My Work</a><a href="#case-studies">Case Studies</a><a href="#skills">Technical</a><a href="#education">Education</a><a href="admin.html" class="nav-dashboard" aria-label="Open private analytics dashboard">Dashboard</a></div><div class="nav-actions"><button aria-label="Search portfolio" class="theme-toggle" id="portfolioSearchToggle" type="button">⌕ Search</button><button aria-label="Toggle theme" class="theme-toggle" id="themeToggle" type="button">☾ Theme</button></div></div></nav>
+<nav><div class="container nav"><div class="brand"><span class="sap-test-logo" aria-label="SAP logo" title="SAP"><span>SAP</span></span> SAP ABAP Developer</div><div class="navlinks"><a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#workbench">My Work</a><a href="#case-studies">Case Studies</a><a href="#skills">Technical</a><a href="#education">Education</a><a href="#resume-builder">Resume Builder</a><a href="admin.html" class="nav-dashboard" aria-label="Open private analytics dashboard">Dashboard</a></div><div class="nav-actions"><button aria-label="Search portfolio" class="theme-toggle" id="portfolioSearchToggle" type="button">⌕ Search</button><button aria-label="Toggle theme" class="theme-toggle" id="themeToggle" type="button">☾ Theme</button></div></div></nav>
 <main class="container">
 <header class="reveal"><div class="hero-glow"></div><div class="hero-layout">
 <div class="hero-main">
@@ -623,6 +668,40 @@ details.case-study summary:hover{background:var(--accent-soft)}
 <section class="reveal" id="education"><div class="section-head"><div><div class="section-kicker">Credentials</div><h2>Certification &amp; Education</h2></div><p class="intro">Formal education, SAP certification and structured ABAP training.</p></div><div class="cert-feature"><div class="cert-icon">SAP</div><div><strong>SAP Certified Associate – Back-End Developer – ABAP Cloud</strong><div class="muted">Professional SAP certification focused on modern backend development on the ABAP Cloud stack.</div></div></div><div class="grid"><div class="card"><strong>ABAP Training — Udemy</strong><span class="muted">Core ABAP programming, modularization techniques, Data Dictionary, internal tables and SAP development concepts.</span></div><div class="card"><strong>Bachelor of Computer Applications (BCA)</strong><span class="muted">MITS School of Biotechnology, Bhubaneswar, Odisha · 2022</span></div><div class="card"><strong>12th — Science Stream</strong><span class="muted">Christ College, Cuttack · 2019</span></div><div class="card"><strong>10th</strong><span class="muted">Stewart School, Cuttack · 2016</span></div></div></section>
 <section class="reveal"><div class="grid"><div class="card"><div class="accent-line">Languages</div><strong>English · Hindi</strong></div><div class="card"><div class="accent-line">Interests</div><strong>Cooking · Outdoor Games</strong></div></div></section>
 <section class="reveal"><div class="contact-band"><div><div class="section-kicker" style="color:#9cc9f7">Contact</div><h2 style="color:#fff;margin-bottom:5px">Let's Connect</h2><div class="muted">Interested in discussing SAP ABAP, S/4HANA development, integration or backend opportunities? I'd be happy to connect.</div></div><div class="contact-band-layout"><div><div class="contacts"><a class="contact-link" href="mailto:syedshayan.ali.330@gmail.com?subject=SAP%20ABAP%20Opportunity%20-%20Portfolio%20Website"><svg aria-hidden="true" class="contact-icon" viewBox="0 0 24 24" role="img"><path d="M3 5h18v14H3V5Zm2 2v.4l7 5.1 7-5.1V7l-7 5-7-5Zm0 3.1V17h14v-6.9l-6.41 4.67a1 1 0 0 1-1.18 0L5 10.1Z"/></svg><span>Email</span></a><a class="whatsapp-contact" href="https://wa.me/918249097645?text=Hello%20Shayan%2C%20I%E2%80%99m%20reaching%20out%20regarding%20a%20potential%20SAP%20ABAP%20opportunity.%20Please%20let%20me%20know%20a%20convenient%20time%20to%20connect.%20Thank%20you." rel="noopener" target="_blank"><svg aria-hidden="true" class="whatsapp-icon" viewBox="0 0 24 24" role="img"><path d="M12 2.2a9.8 9.8 0 0 0-8.43 14.8L2.2 21.8l4.94-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.8a8 8 0 0 1-4.08-1.12l-.29-.17-2.93.77.78-2.86-.19-.3A8 8 0 1 1 12 20Zm4.39-5.97c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-1.43-.72-2.37-1.28-3.31-2.9-.25-.43.25-.4.72-1.33.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.31.98 2.47.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/></svg><span>WhatsApp Me</span></a><a class="contact-link" href="https://www.linkedin.com/in/syed-shayan-ali-793152230" rel="noopener" target="_blank"><svg aria-hidden="true" class="contact-icon" viewBox="0 0 24 24" role="img"><path d="M5.1 8.3A1.8 1.8 0 1 0 5.1 4.7a1.8 1.8 0 0 0 0 3.6ZM3.6 9.8h3v9.1h-3V9.8Zm5 0h2.9v1.25h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6v4.81h-3v-4.26c0-1.02-.02-2.33-1.42-2.33-1.42 0-1.64 1.1-1.64 2.26v4.33h-3V9.8Z"/></svg><span>LinkedIn</span></a><button class="share-portfolio" id="sharePortfolio" type="button" aria-label="Share this portfolio"><svg aria-hidden="true" class="contact-icon" viewBox="0 0 24 24" role="img"><path d="M18 16.1c-.77 0-1.46.3-1.99.78L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.02-4.09A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.07 9.79A3 3 0 1 0 9 14.21l7.1 4.19c-.06.19-.1.39-.1.6a3 3 0 1 0 2-2.9Z"/></svg><span>Share Portfolio</span></button></div><div class="contacts" style="margin-top:8px"></div></div><div class="portfolio-qr" aria-label="Portfolio QR code"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=https%3A%2F%2Fshayan263.github.io%2FShayan_Profile%2F%3Futm_source%3Dqr%26utm_medium%3Doffline%26utm_campaign%3Dportfolio_qr" alt="QR code to open Syed Shayan Ali portfolio"/><div><strong>Scan to view portfolio</strong><span>Open the live portfolio instantly from your phone.</span></div></div></div></div></section>
+<section id="resume-builder" class="reveal">
+<div class="section-head">
+  <div><div class="section-kicker">Resume Builder</div><h2>Build an ATS-ready resume</h2></div>
+  <p class="intro">Edit your content, preview the resume instantly, save a local draft, and print the finished version to PDF.</p>
+</div>
+<div class="rb-layout">
+  <div class="rb-panel">
+    <h3>Resume details</h3>
+    <div class="rb-sub">Your changes stay in this browser until you choose to print them.</div>
+    <div class="rb-grid">
+      <div class="rb-field"><label for="rbName">Name</label><input id="rbName" value="Syed Shayan Ali"></div>
+      <div class="rb-field"><label for="rbTitle">Target title</label><input id="rbTitle" value="SAP ABAP Developer"></div>
+      <div class="rb-field"><label for="rbExpYears">Experience</label><input id="rbExpYears" value="3.7 Years"></div>
+      <div class="rb-field"><label for="rbLocation">Location</label><input id="rbLocation" value="India"></div>
+      <div class="rb-field full"><label for="rbContact">Contact line</label><input id="rbContact" value="LinkedIn  •  Email  •  Portfolio"></div>
+      <div class="rb-field full"><label for="rbSummary">Professional summary</label><textarea id="rbSummary">SAP ABAP Developer with experience in S/4HANA development, RICEFW components, OData, CDS Views, RAP, integrations and enterprise interfaces.</textarea></div>
+      <div class="rb-field full"><label for="rbSkills">Technical skills</label><textarea id="rbSkills">SAP ABAP, S/4HANA, OData, CDS Views, RAP, SAP BTP, CPI, Fiori, IDocs, BAPIs, RFCs, Enhancements</textarea></div>
+      <div class="rb-field full"><label>Experience entries</label><div id="rbExperiences"></div><button type="button" class="rb-btn" id="rbAddExp">+ Add experience</button></div>
+      <div class="rb-field full"><label for="rbEducation">Education</label><input id="rbEducation" value=""></div>
+    </div>
+    <div class="rb-actions">
+      <button type="button" class="rb-btn primary" id="rbPrint">Download / Print PDF</button>
+      <button type="button" class="rb-btn" id="rbSave">Save Draft</button>
+      <button type="button" class="rb-btn" id="rbReset">Reset</button>
+    </div>
+    <div class="rb-status" id="rbStatus">Live preview updates as you type.</div>
+  </div>
+  <div class="rb-preview">
+    <h3>Live preview</h3>
+    <div class="rb-sub">ATS-friendly single-column preview.</div>
+    <div class="rb-paper" id="rbPaper"></div>
+  </div>
+</div>
+</section>
 <footer>© 2026 Syed Shayan Ali · SAP ABAP Developer · <a href="#top">Back to top ↑</a></footer>
 
 <script>
@@ -1007,4 +1086,66 @@ details.case-study summary:hover{background:var(--accent-soft)}
 
 })();
 </script>
-</main></body></html>
+</main><script>
+(function(){
+  const ids=['rbName','rbTitle','rbExpYears','rbLocation','rbContact','rbSummary','rbSkills','rbEducation'];
+  const $=id=>document.getElementById(id);
+  const paper=$('rbPaper'), list=$('rbExperiences'), status=$('rbStatus');
+  const defaultExp=[{company:'Deloitte Consulting Pvt. Ltd.',role:'SAP ABAP Developer',dates:'Feb 2023 – Present',details:'S/4HANA development, RICEFW, OData, CDS, RAP and enterprise integrations.'}];
+
+  function addExperience(data=defaultExp[0]){
+    const row=document.createElement('div'); row.className='rb-exp';
+    row.innerHTML='<div class="rb-exp-head"><strong>Experience</strong><button type="button" class="rb-remove">Remove</button></div>'+
+      '<div class="rb-grid">'+
+      '<div class="rb-field"><label>Company</label><input data-k="company"></div>'+
+      '<div class="rb-field"><label>Role</label><input data-k="role"></div>'+
+      '<div class="rb-field"><label>Dates</label><input data-k="dates"></div>'+
+      '<div class="rb-field"><label>Location</label><input data-k="location"></div>'+
+      '<div class="rb-field full"><label>Highlights</label><textarea data-k="details"></textarea></div></div>';
+    row.querySelector('[data-k="company"]').value=data.company||'';
+    row.querySelector('[data-k="role"]').value=data.role||'';
+    row.querySelector('[data-k="dates"]').value=data.dates||'';
+    row.querySelector('[data-k="location"]').value=data.location||'';
+    row.querySelector('[data-k="details"]').value=data.details||'';
+    row.querySelector('.rb-remove').onclick=()=>{row.remove();render();};
+    row.querySelectorAll('input,textarea').forEach(x=>x.addEventListener('input',render));
+    list.appendChild(row); render();
+  }
+  function experiences(){
+    return [...list.querySelectorAll('.rb-exp')].map(row=>{
+      const o={}; row.querySelectorAll('[data-k]').forEach(x=>o[x.dataset.k]=x.value.trim()); return o;
+    });
+  }
+  function value(id){return $(id).value.trim();}
+  function render(){
+    const bullets=value('rbSkills').split(',').map(x=>x.trim()).filter(Boolean);
+    const jobs=experiences();
+    paper.innerHTML=
+      '<h1>'+esc(value('rbName')||'Your Name')+'</h1>'+
+      '<div class="rb-role">'+esc(value('rbTitle')||'Professional Title')+'</div>'+
+      '<div class="rb-contact">'+esc(value('rbLocation'))+(value('rbLocation')&&value('rbContact')?'  •  ':'')+esc(value('rbContact'))+'</div>'+
+      '<section><h2>Professional Summary</h2><p>'+esc(value('rbSummary')||'Add a professional summary.')+'</p></section>'+
+      '<section><h2>Professional Experience</h2>'+jobs.map(j=>'<div class="rb-job"><div class="rb-jobtop"><span>'+esc(j.role||'Role')+' — '+esc(j.company||'Company')+'</span><span>'+esc(j.dates||'Dates')+'</span></div>'+(j.location?'<div class="rb-muted">'+esc(j.location)+'</div>':'')+(j.details?'<p>'+esc(j.details)+'</p>':'')+'</div>').join('')+'</section>'+
+      '<section><h2>Technical Skills</h2><p>'+bullets.map(esc).join(' • ')+'</p></section>'+
+      '<section><h2>Education</h2><p>'+esc(value('rbEducation')||'Add education details.')+'</p></section>';
+  }
+  function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+  ids.forEach(id=>$(id).addEventListener('input',render));
+  $('rbAddExp').onclick=()=>addExperience({company:'',role:'',dates:'',location:'',details:''});
+  $('rbPrint').onclick=()=>window.print();
+  $('rbSave').onclick=()=>{
+    localStorage.setItem('shayanResumeBuilder',JSON.stringify({fields:Object.fromEntries(ids.map(id=>[id,value(id)])),experiences:experiences()}));
+    status.textContent='Draft saved on this device.';
+  };
+  $('rbReset').onclick=()=>{
+    localStorage.removeItem('shayanResumeBuilder'); ids.forEach(id=>$(id).value=$(id).defaultValue);
+    list.innerHTML=''; addExperience(defaultExp[0]); status.textContent='Draft reset.';
+  };
+  try{
+    const saved=JSON.parse(localStorage.getItem('shayanResumeBuilder')||'null');
+    if(saved?.fields){ids.forEach(id=>{if(saved.fields[id]!=null)$(id).value=saved.fields[id];});list.innerHTML='';(saved.experiences||defaultExp).forEach(addExperience);}
+    else addExperience(defaultExp[0]);
+  }catch(e){addExperience(defaultExp[0]);}
+  render();
+})();
+</script></body></html>
