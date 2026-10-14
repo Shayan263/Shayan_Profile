@@ -30,7 +30,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if grep -RInE --exclude-dir=.git --exclude='*.md' 'http://[^/]' .; then
+          if grep -RInE --exclude-dir=.git --exclude='*.md' 'http:[/][/][^/]' .; then
             echo "Plain HTTP URL detected."
             exit 1
           fi
