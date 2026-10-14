@@ -205,7 +205,7 @@ details.case-study summary:hover{background:var(--accent-soft)}
       <button class="visitor-option" type="button" data-visitor-type="Referral" onclick="window.__closeVisitorPopup&&window.__closeVisitorPopup(this.dataset.visitorType)">I'm Looking for a Referral<span>Exploring my profile through a professional connection</span></button>
       <button class="visitor-option" type="button" data-visitor-type="Exploring" onclick="window.__closeVisitorPopup&&window.__closeVisitorPopup(this.dataset.visitorType)">Just Exploring<span>Taking a look at my SAP development work</span></button>
     </div>
-    <p class="visitor-note">Visit analytics are limited to portfolio usage data such as source, device category and selected visitor type.</p>
+    <p class="visitor-note">Optional: choose a visitor type, or continue directly to the portfolio. Analytics should only collect the minimum information needed.</p><button class="visitor-option" id="visitorContinue" type="button">Continue to portfolio without selecting</button>
   </div>
 </div>
 
@@ -749,6 +749,9 @@ details.case-study summary:hover{background:var(--accent-soft)}
   if(visitorAlreadyCompleted){
     logToSheet(getVisitorContext());
   }
+
+  const visitorContinue=document.getElementById('visitorContinue');
+  if(visitorContinue){visitorContinue.addEventListener('click',()=>{closeVisitorModal();try{localStorage.setItem(visitorCompletedKey,'1')}catch(e){}})}
 
   // Keep the visitor experience to a single popup.
   // The visitor type is logged immediately after the visitor makes an explicit choice.
