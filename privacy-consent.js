@@ -12,6 +12,7 @@
   let sessionConsent = readConsent();
   function analyticsAllowed() { return Boolean(sessionConsent && sessionConsent.analytics === true); }
   function removeAnalyticsIdentifier() { try { localStorage.removeItem("shayanPortfolioVisitorId"); } catch (_) {} }
+  if (!analyticsAllowed()) removeAnalyticsIdentifier();
   function stopOptionalAnalytics() {
     removeAnalyticsIdentifier();
     window.dispatchEvent(new CustomEvent("privacy-analytics-disabled"));
