@@ -1014,9 +1014,16 @@ section h2{color:#f0f2f5;font-size:29px}
 
   // Highlight the nav item matching the visible section.
   const navLinks=[...document.querySelectorAll('.navlinks a')];
-  const sections=[...document.querySelectorAll('section[id],header')];
-  const navObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting && entry.target.id){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}})},{rootMargin:'-25% 0px -60% 0px',threshold:0});
-  document.querySelectorAll('section[id]').forEach(s=>navObserver.observe(s));
+  if('IntersectionObserver' in window){
+    const navObserver=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting && entry.target.id){
+          navLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+entry.target.id));
+        }
+      });
+    },{rootMargin:'-25% 0px -60% 0px',threshold:0});
+    document.querySelectorAll('section[id]').forEach(section=>navObserver.observe(section));
+  }
 })();
 </script>
 </main><script>
