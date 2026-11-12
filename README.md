@@ -20,7 +20,6 @@ SAP ABAP Developer with 3.7+ years of experience in SAP S/4HANA implementation, 
 - SAP S/4HANA
 - OData
 - SAP CPI
-- SAP BTP
 - CDS Views
 - RAP
 - IDoc / BAPI / RFC
