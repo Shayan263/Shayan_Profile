@@ -365,8 +365,6 @@ supabaseClient.auth.getSession().then(({data})=>{
   if(data.session) showDashboard();
 });
 </script>
-</body>
-</html>
 <script>
 // Resilient dashboard health check: retry Supabase connectivity automatically.
 let dashboardRetryTimer=null;
@@ -391,3 +389,6 @@ loadDashboard=async function(){
   }
 };
 </script>
+</body>
+</html>
+
