@@ -12,7 +12,7 @@ Welcome to my SAP ABAP development portfolio.
 
 ## About
 
-SAP ABAP Developer with 3+ years of experience in SAP S/4HANA implementation, RICEFW development, integrations, OData, SAP CPI, SAP BTP, CDS Views and RAP.
+SAP ABAP Developer with 3.7+ years of experience in SAP S/4HANA implementation, RICEFW development, integrations, OData, SAP CPI, CDS Views and RAP.
 
 ## Technologies
 
@@ -20,7 +20,6 @@ SAP ABAP Developer with 3+ years of experience in SAP S/4HANA implementation, RI
 - SAP S/4HANA
 - OData
 - SAP CPI
-- SAP BTP
 - CDS Views
 - RAP
 - IDoc / BAPI / RFC

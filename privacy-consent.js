@@ -62,7 +62,7 @@
     title.textContent = "Your privacy choices";
     const description = document.createElement("p");
     description.id = "privacy-consent-description";
-    description.textContent = "Optional analytics measure portfolio visits and interactions. They stay off unless you opt in. Your visitor-category choice is separate and optional.";
+    description.textContent = "Optional analytics measure portfolio visits and interactions. They stay off unless you opt in. The Recruiter Corner is optional and does not require analytics consent.";
     const links = document.createElement("p");
     const privacy = document.createElement("a");
     privacy.href = "privacy.html";

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shayan263.github.io/Shayan_Profile/sitemap.xml
