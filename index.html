@@ -126,24 +126,6 @@ details.case-study[open] .case-body{
 @media(max-width:860px){.brand{font-size:15px}.theme-toggle{padding:7px 9px}.navlinks a{font-size:12px}}@media(max-width:520px){.impact-grid{grid-template-columns:1fr}.impact-card.impact-primary{grid-column:span 1}.nav-actions{gap:5px}.nav-actions .theme-toggle{padding:7px 8px}.portfolio-search-panel{top:108px;right:10px;width:calc(100vw - 20px)}.portfolio-search-actions button{padding:8px 8px}}@media(max-width:620px){header{padding:30px 20px;margin-top:20px}section{padding:24px 19px;margin-bottom:16px}.metrics,.process-grid,.approach,.work-map,.work-stat-row{grid-template-columns:1fr}.approach-step:after{display:none!important}.section-head{display:block}.contact-band{display:block;padding:24px}.contact-band .contacts{justify-content:flex-start;margin-top:15px}.hero-facts{gap:6px}.hero-summary{font-size:15px;line-height:1.65;margin:15px 0 19px}.role{font-size:18px}.impact-card.impact-primary{grid-column:span 1}.hero-fact{font-size:12.5px}.navlinks{gap:2px}.navlinks a{padding:7px 8px}}
 @media print{nav,.theme-toggle,.quick-nav,.case-toolbar,.expand-row,.scroll-progress{display:none}body{background:#fff}header,section{box-shadow:none;break-inside:avoid}.container{width:100%}}
 
-/* Visitor-intent popup */
-.visitor-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:rgba(7,18,32,.55);backdrop-filter:blur(8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease,visibility .3s ease}
-.visitor-modal.show{opacity:1;visibility:visible;pointer-events:auto}
-.visitor-dialog{width:min(520px,100%);padding:30px;background:var(--surface);border:1px solid var(--border-strong);border-radius:22px;box-shadow:0 24px 70px rgba(4,18,35,.22);transform:translateY(18px) scale(.98);transition:transform .35s cubic-bezier(.22,1,.36,1)}
-.visitor-modal.show .visitor-dialog{transform:translateY(0) scale(1)}
-.visitor-kicker{font-size:11px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
-.visitor-dialog h2{font-size:27px;margin:0 0 8px}
-.visitor-dialog p{font-size:15px;color:var(--muted);line-height:1.65;margin:0 0 20px}
-.visitor-options{display:grid;grid-template-columns:1fr;gap:10px}
-.visitor-option{width:100%;padding:13px 15px;text-align:left;border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:13px;cursor:pointer;font:inherit;font-size:14px;font-weight:750;transition:transform .2s ease,border-color .2s ease,background-color .2s ease,color .2s ease}
-.visitor-option:hover{transform:translateY(-2px);border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
-.visitor-option span{display:block;margin-top:2px;font-size:12px;font-weight:500;color:var(--muted)}
-.visitor-option:hover span{color:var(--accent-2)}
-.visitor-note{margin-top:14px!important;margin-bottom:0!important;font-size:11px!important;line-height:1.5!important}
-.visitor-details{margin-top:16px;display:grid;gap:8px}.visitor-details[hidden]{display:none}.visitor-details label{font-size:12px;font-weight:750;color:var(--text);margin-top:3px}.visitor-details label span{font-weight:500;color:var(--muted)}.visitor-details input{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:11px;font:inherit;font-size:13px;outline:none;transition:border-color .2s ease,box-shadow .2s ease}.visitor-details input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}.visitor-submit{margin-top:6px;border:0;border-radius:11px;padding:12px 15px;background:var(--accent);color:#fff;font:inherit;font-size:13px;font-weight:800;cursor:pointer;transition:transform .2s ease,opacity .2s ease}.visitor-submit:hover{transform:translateY(-2px);opacity:.92}.visitor-close{display:none}
-@media(max-width:520px){.visitor-dialog{padding:24px 20px}.visitor-dialog h2{font-size:24px}}
-
-
 .resume-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;padding:11px 16px;border-radius:11px;background:var(--accent);color:#fff!important;border:1px solid var(--accent);font-size:13px;font-weight:800;box-shadow:0 8px 20px rgba(10,110,209,.18);transition:transform .18s,box-shadow .18s,background-color .18s}
 .resume-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(10,110,209,.24);background:var(--accent-2)}
 .resume-cta:focus-visible{outline:3px solid var(--accent-soft);outline-offset:3px}
@@ -257,7 +239,7 @@ details.case-study summary:hover{background:var(--accent-soft)}
 <span class="eyebrow">SAP ABAP / S/4HANA</span>
 <h1>Syed Shayan Ali</h1>
 <div class="role">SAP ABAP Developer · S/4HANA · RICEFW · OData & Fiori</div>
-<p class="hero-summary">SAP ABAP Developer with <strong>3+ years of experience</strong> building S/4HANA solutions, enterprise integrations and modern backend services — from requirement understanding through deployment and production support.</p>
+<p class="hero-summary">SAP ABAP Developer with <strong>3.7+ years of experience</strong> building S/4HANA solutions, enterprise integrations and modern backend services — from requirement understanding through deployment and production support.</p>
 <div class="hero-impact" aria-label="Career highlights"><div class="hero-impact-card"><strong>3.7+</strong><span>Years SAP Experience</span></div><div class="hero-impact-card"><strong>4</strong><span>Successful Go-Lives</span></div><div class="hero-impact-card"><strong>S/4HANA</strong><span>Development &amp; Integration</span></div></div>
 <div class="hero-availability"><span>Open to SAP ABAP opportunities</span></div>
 <div class="hero-divider"></div>
@@ -718,7 +700,6 @@ details.case-study summary:hover{background:var(--accent-soft)}
       .catch(()=>null);
     return supabaseClientPromise;
   }
-  let selectedVisitorType='';
   function getVisitorContext(){
     const params=new URLSearchParams(window.location.search);
     let source=(params.get('utm_source')||'').trim().toLowerCase(),refHost='';
@@ -727,7 +708,7 @@ details.case-study summary:hover{background:var(--accent-soft)}
     if(!source&&refHost)source=refHost.replace(/^www\\./,'');
     if(!source)source='direct';
     const width=window.innerWidth;
-    return {event:'page_view',visitor_type:'',source,medium:params.get('utm_medium')||'',campaign:params.get('utm_campaign')||'',device:width<640?'Mobile':(width<1024?'Tablet':'Desktop'),page:window.location.pathname,referrer:refHost};
+    return {event:'page_view',source,medium:params.get('utm_medium')||'',campaign:params.get('utm_campaign')||'',device:width<640?'Mobile':(width<1024?'Tablet':'Desktop'),page:window.location.pathname,referrer:refHost};
   }
   function getVisitorId(){
     const key='shayanPortfolioVisitorId';
@@ -848,7 +829,7 @@ details.case-study summary:hover{background:var(--accent-soft)}
   // Track contact and resume actions.
   const whatsappContact=document.querySelector('a[href^="https://wa.me/"]');
   if(whatsappContact){
-    whatsappContact.addEventListener('click',()=>trackEvent({...getVisitorContext(),event:'whatsapp_click',visitor_type:selectedVisitorType}));
+    whatsappContact.addEventListener('click',()=>trackEvent({...getVisitorContext(),event:'whatsapp_click'}));
   }
 
   document.querySelectorAll('a[href^="mailto:"]').forEach(link=>{
