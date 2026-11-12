@@ -982,14 +982,19 @@ section h2{color:#f0f2f5;font-size:29px}
 
   // Scroll reveal.
   const revealElements=[...document.querySelectorAll('.reveal')];
-  const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});
-  revealElements.forEach((el, i)=>{
-    el.style.transitionDelay=(Math.min(i,10)*45)+'ms';
-    observer.observe(el);
-  });
-  window.addEventListener('pageshow',()=>{
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:.08,rootMargin:'0px 0px 40px 0px'});
+    revealElements.forEach(el=>observer.observe(el));
+  }else{
     revealElements.forEach(el=>el.classList.add('visible'));
-  });
+  }
 
   // Case study filtering and searching.
   const cases=[...document.querySelectorAll('.case-study')];
@@ -1012,19 +1017,6 @@ section h2{color:#f0f2f5;font-size:29px}
   const sections=[...document.querySelectorAll('section[id],header')];
   const navObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting && entry.target.id){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}})},{rootMargin:'-25% 0px -60% 0px',threshold:0});
   document.querySelectorAll('section[id]').forEach(s=>navObserver.observe(s));
-  // Premium motion interactions.
-  const motionHeader=document.querySelector('header');
-  if(motionHeader && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    motionHeader.addEventListener('pointermove',e=>{
-      const r=motionHeader.getBoundingClientRect();
-      const x=((e.clientX-r.left)/r.width-.5)*2;
-      const y=((e.clientY-r.top)/r.height-.5)*2;
-      motionHeader.style.setProperty('--pointer-x',x.toFixed(3));
-      motionHeader.style.setProperty('--pointer-y',y.toFixed(3));
-    });
-    motionHeader.addEventListener('pointerleave',()=>{motionHeader.style.setProperty('--pointer-x','0');motionHeader.style.setProperty('--pointer-y','0')});
-  }
-
 })();
 </script>
 </main><script>
