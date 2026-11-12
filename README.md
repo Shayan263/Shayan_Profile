@@ -6,13 +6,11 @@ Welcome to my SAP ABAP development portfolio.
 
 👉 **[View my Resume & Portfolio](https://shayan263.github.io/Shayan_Profile/)**
 
-> For the HTML page to open as a rendered website from GitHub, enable **GitHub Pages** for this repository. The final public website will look like:
->
-> https://shayan263.github.io/Shayan_Profile/
+> The live portfolio is published at the link above. Repository changes are reviewed on `root` before being promoted to `main`.
 
 ## About
 
-SAP ABAP Developer with 3.7+ years of experience in SAP S/4HANA implementation, RICEFW development, integrations, OData, SAP CPI, CDS Views and RAP.
+SAP ABAP Developer with 4 years of experience in SAP S/4HANA implementation, RICEFW development, integrations, OData, SAP CPI, CDS Views and RAP.
 
 ## Technologies
 
