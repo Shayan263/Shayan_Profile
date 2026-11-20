@@ -259,6 +259,90 @@ section h2{color:#f0f2f5;font-size:29px}
 @media(prefers-reduced-motion:reduce){.code-window,.hero-main>*{animation:none!important;transition:none!important}}
 </style>
 <link rel="stylesheet" href="recruiter.css">
+<style id="responsive-cleanup">
+/* Unified responsive layer: desktop, tablet and mobile */
+html{scroll-padding-top:112px}
+body{overflow-x:hidden}
+img,svg,video{max-width:100%;height:auto}
+.container{width:min(1120px,calc(100% - 40px))}
+header,section{min-width:0}
+section{scroll-margin-top:112px}
+.grid,.case-grid,.impact-grid,.process-grid,.highlight-grid,.work-map,.work-dashboard{min-width:0}
+.grid>*,.case-grid>*,.impact-grid>*,.process-grid>*,.highlight-grid>*,.work-map>*,.work-dashboard>*{min-width:0}
+p,.muted,.intro,.case-description,.process-detail{overflow-wrap:anywhere}
+.nav,.navlinks,.hero-layout>*{min-width:0}
+.navlinks{scrollbar-width:thin}
+.hero-main h1{overflow-wrap:anywhere}
+.contact-band-layout,.contact-band,.contacts{min-width:0;flex-wrap:wrap}
+.portfolio-qr{max-width:100%;min-width:0}
+@media(min-width:1100px){
+ .container{width:min(1120px,calc(100% - 56px))}
+ header{padding:46px 48px}
+ section{padding:38px 42px}
+ .hero-layout{grid-template-columns:minmax(0,1.5fr) minmax(280px,.5fr);gap:44px}
+}
+@media(max-width:900px){
+ .container{width:calc(100% - 36px)}
+ .nav{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:10px 0}
+ .navlinks{grid-column:1/-1;grid-row:2;justify-content:flex-start;width:100%;overflow-x:auto}
+ .nav-actions{grid-column:2;grid-row:1;gap:6px}
+ .hero-layout{grid-template-columns:1fr;gap:24px}
+ .hero-side{max-width:none}
+ .section-head{align-items:flex-start}
+ .work-dashboard{grid-template-columns:1fr}
+ .case-search{margin-left:0;min-width:0;flex:1 1 100%}
+}
+@media(max-width:700px){
+ .container{width:calc(100% - 28px)}
+ header{margin:16px 0;padding:28px 20px}
+ section{padding:25px 19px;margin-bottom:14px;border-radius:16px}
+ .section-head{display:block;margin-bottom:18px}
+ .section-head .intro,.intro{max-width:none;margin-top:8px;font-size:14px}
+ .hero-main h1{font-size:clamp(38px,10vw,54px);letter-spacing:-1.8px;line-height:1.04}
+ .hero-main .role,.role{font-size:18px}
+ .hero-summary{font-size:15px;line-height:1.65}
+ .hero-impact{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .hero-impact-card{padding:10px 7px}
+ .hero-impact-card strong{font-size:16px}
+ .hero-impact-card span{font-size:8px}
+ .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .grid,.case-grid,.impact-grid,.process-grid,.highlight-grid,.work-map,.work-dashboard,.work-stat-row{grid-template-columns:1fr}
+ .section-head h2{font-size:clamp(24px,6vw,30px)}
+ .experience-copy p,.case-body p,p{font-size:15px;line-height:1.68}
+ .case-card{padding:15px}
+ details.case-study summary{padding:16px;align-items:flex-start;flex-wrap:wrap}
+ .case-read{white-space:normal}
+ .case-body{padding:4px 16px 18px;font-size:15px}
+ .case-meta{margin:0 15px 10px}
+ .case-toolbar{align-items:stretch}
+ .filter-btn{flex:0 0 auto}
+ .expand-row{flex-wrap:wrap}
+ .contact-band{padding:22px 18px}
+ .contact-band-layout{display:flex;flex-direction:column;align-items:stretch;gap:16px}
+ .contact-band .contacts{display:flex;flex-wrap:wrap}
+ .portfolio-qr{width:100%}
+ .timeline{padding-left:22px}
+}
+@media(max-width:440px){
+ .nav{grid-template-columns:minmax(0,1fr) auto}
+ .brand{font-size:14px}
+ .nav-actions{gap:4px}
+ .nav-actions .recruiter-nav-button{padding:7px 8px;font-size:10px}
+ .nav-actions .theme-toggle{padding:7px 8px;font-size:11px}
+ .navlinks a{padding:7px 9px;font-size:11px}
+ .hero-impact{grid-template-columns:1fr 1fr}
+ .hero-impact-card:last-child{grid-column:1/-1}
+ .metrics{grid-template-columns:1fr 1fr}
+ .contacts a,.quick-nav a{padding:8px 10px;font-size:12px}
+ .portfolio-search-row{flex-wrap:wrap}
+ .portfolio-search-actions{width:100%;justify-content:flex-end}
+ .portfolio-search-panel{top:108px;padding:10px 12px}
+ .experience-meta{gap:7px 12px;font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}</style>
 </head>
 <body id="top" class="dark">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -286,119 +370,20 @@ section h2{color:#f0f2f5;font-size:29px}
 
 
 
-<section class="reveal" id="journey">
-<div class="section-head">
-<div><div class="section-kicker">My Journey</div><h2>From Joining Deloitte to Building SAP Solutions</h2></div>
-<p class="intro">A timeline of how my SAP ABAP experience has grown through implementation projects, technical ownership, integrations and newer S/4HANA technologies.</p>
-</div>
-<div class="journey-timeline">
-<div class="journey-item">
-<div class="journey-dot">01</div>
-<div class="journey-content">
-<div class="journey-date">February 2026 · Started at Deloitte</div>
-<h3>Started my SAP ABAP journey</h3>
-<p>I joined <strong>Deloitte Consulting Pvt Ltd</strong> as an SAP ABAP Developer and began working in enterprise SAP environments, building a strong foundation across ABAP development, debugging, enhancements and RICEFW objects.</p>
-<div class="journey-tags"><span>ABAP</span><span>RICEFW</span><span>ECC / S/4HANA</span></div>
-</div>
-</div>
-
-<div class="journey-item">
-<div class="journey-dot">02</div>
-<div class="journey-content">
-<div class="journey-date">S/4HANA Implementation Projects</div>
-<h3>Moved deeper into implementation work</h3>
-<p>My work expanded into <strong>S/4HANA implementation projects</strong>, where I worked across requirements, technical design, development, testing and issue resolution. I contributed to RICEFW development across areas including <strong>SD, PPDS, P2P and P2M</strong>, while working closely with functional teams.</p>
-<div class="journey-tags"><span>S/4HANA</span><span>RICEFW</span><span>SD</span><span>PPDS</span><span>P2P</span></div>
-</div>
-</div>
-
-<div class="journey-item">
-<div class="journey-dot">03</div>
-<div class="journey-content">
-<div class="journey-date">Integration &amp; Interface Development</div>
-<h3>Started solving cross-system integration problems</h3>
-<p>I gained hands-on experience developing and troubleshooting interfaces using <strong>IDocs, BAPIs, RFCs, OData and REST-based services</strong>. I also worked with <strong>CPI and SAP AIF</strong>, giving me exposure to both the ABAP side of integrations and the monitoring and error-handling side of enterprise interfaces.</p>
-<div class="journey-tags"><span>IDoc</span><span>BAPI</span><span>RFC</span><span>OData</span><span>CPI</span><span>AIF</span></div>
-</div>
-</div>
-
-<div class="journey-item">
-<div class="journey-dot">04</div>
-<div class="journey-content">
-<div class="journey-date">Go-Live Experience</div>
-<h3>From development to implementation delivery</h3>
-<p>I contributed to cutover and delivery activities across <strong>four successful SAP go-lives</strong>. This gave me experience beyond development — including transport and dependency checks, testing support, issue resolution, cutover coordination and supporting the system through implementation milestones.</p>
-<div class="journey-tags"><span>4 Successful Go-Lives</span><span>Cutover</span><span>TR Analysis</span><span>Production Support</span></div>
-</div>
-</div>
-
-<div class="journey-item">
-<div class="journey-dot">05</div>
-<div class="journey-content">
-<div class="journey-date">Modern S/4HANA Development</div>
-<h3>Expanded into CDS, Fiori and RAP</h3>
-<p>As my experience grew, I moved beyond traditional ABAP into modern S/4HANA development. I worked with <strong>CDS Views, OData and Fiori backend development</strong> and developed a RAP service by creating the relevant CDS layers and exposing the service. I also explored <strong>Custom Business Objects and Custom Fields &amp; Logic</strong> as extensibility approaches.</p>
-<div class="journey-tags"><span>CDS Views</span><span>OData</span><span>Fiori</span><span>RAP</span><span>CBO</span><span>CFL</span></div>
-</div>
-</div>
-
-<div class="journey-item">
-<div class="journey-dot">06</div>
-<div class="journey-content">
-<div class="journey-date">Today</div>
-<h3>Building broader SAP technical depth</h3>
-<p>Today, my focus is on combining strong <strong>ABAP fundamentals</strong> with modern SAP development practices. I continue to work on technical problem solving, integrations, clean-core-oriented extensibility and S/4HANA development while strengthening my knowledge of <strong>ABAP Cloud, RAP and integration technologies</strong>.</p>
-<p class="journey-closing">The journey has gradually moved from writing ABAP code to understanding the complete technical flow — from a business requirement and system process to integration, debugging, implementation and production delivery.</p>
-<div class="journey-tags"><span>ABAP Cloud</span><span>RAP</span><span>Clean Core</span><span>Integration</span></div>
-</div>
-</div>
-</div>
-</section>
-
-<section class="reveal"><div class="section-head"><div><div class="section-kicker">Delivery Capability</div><h2>What I Can Deliver</h2></div><p class="intro">Practical development and delivery capabilities across SAP backend and integration landscapes.</p></div><div class="grid"><div class="card"><div class="accent-line">RICEFW Development</div><strong>End-to-End SAP Development</strong><span class="muted">Reports, interfaces, conversions, enhancements and forms across ECC and S/4HANA landscapes.</span></div><div class="card"><div class="accent-line">S/4HANA Development</div><strong>Modern ABAP Backend</strong><span class="muted">CDS Views, OData, RAP and ABAP on HANA development with a focus on modern extensibility.</span></div><div class="card"><div class="accent-line">Integration</div><strong>Connected SAP Solutions</strong><span class="muted">CPI, APIs, IDocs, RFCs and BAPIs for inbound and outbound integration scenarios.</span></div><div class="card"><div class="accent-line">Production Support</div><strong>Root-Cause Analysis</strong><span class="muted">Debugging, issue isolation, technical analysis and resolution across business-critical processes.</span></div><div class="card"><div class="accent-line">Fiori Backend</div><strong>OData &amp; Backend Services</strong><span class="muted">Backend logic and OData services supporting SAP Fiori applications and business workflows.</span></div><div class="card"><div class="accent-line">Process Automation</div><strong>Workflow Improvement</strong><span class="muted">Power Automate and Excel-based automation to reduce manual processing and reconciliation effort.</span></div></div></section>
 
 
-<section class="reveal impact-section" id="impact"><div class="section-head"><div><div class="section-kicker">Business Impact</div><h2>Business Impact &amp; Results</h2></div><p class="intro">Measured outcomes and delivery results from SAP development, automation and implementation work.</p></div><div class="impact-grid"><div class="impact-card impact-primary"><span class="impact-number">RICEFW</span><span class="impact-label">development</span><strong>S/4HANA Delivery</strong><p>Built and supported SAP RICEFW components, interfaces and enhancements across implementation and production-support activities.</p></div><div class="impact-card"><span class="impact-number">3</span><span class="impact-label">greenfield go-lives</span><strong>Implementation Delivery</strong><p>Contributed across development, testing, cutover and post-go-live support for SAP greenfield implementations.</p></div><div class="impact-card"><span class="impact-number">RAP</span><span class="impact-label">modern ABAP</span><strong>Modern S/4HANA Development</strong><p>Worked with CDS Views, OData and RAP to build backend services and expose business functionality.</p></div><div class="impact-card"><span class="impact-number">Fiori</span><span class="impact-label">backend delivery</span><strong>Complex Interface Delivery</strong><p>Delivered complex Fiori backend interfaces under tight deadlines, with formal recognition for the work.</p></div><div class="impact-card"><span class="impact-number">E2E</span><span class="impact-label">problem solving</span><strong>Root-Cause Resolution</strong><p>Traced issues through standard and custom processing to identify the correct enhancement or processing layer rather than fixing only the visible symptom.</p></div><div class="impact-card"><span class="impact-number">SAP ↔ API</span><span class="impact-label">integration delivery</span><strong>End-to-End Integration</strong><p>Worked across OData, CPI, APIs, IDocs, RFCs and BAPIs to support reliable data exchange across business processes.</p></div></div></section>
+
+
+
+
 <section class="reveal" id="experience"><div class="section-head"><div><div class="section-kicker">Experience</div><h2>Professional Experience</h2></div><p class="intro">Deloitte Consulting Pvt Ltd · February 2026 – Present</p></div><div class="timeline"><div class="timelineItem"><span class="timeline-badge">SAP ABAP Developer</span><h3>Deloitte Consulting Pvt Ltd</h3><div class="experience-meta"><span>February 2026 – Present</span><span>S/4HANA Implementation</span></div><div class="experience-copy"><p>At Deloitte Consulting Pvt Ltd, I work as an SAP ABAP Developer delivering full-cycle <strong>RICEFW development</strong> in S/4HANA implementation landscapes. My work covers the development of Reports, Interfaces, Enhancements and Forms, along with ABAP solutions built around business requirements and project timelines.</p><p>I have designed and implemented SAP interfaces using <strong>IDocs, BAPIs and RFCs</strong> for data exchange between SAP and external systems. I work closely with functional teams to understand requirements, translate them into technical solutions, and support the development, testing and issue-resolution cycle. I also participated in cutover activities for <strong>two successful go-lives</strong>.</p><p>My technical environment includes <strong>S/4HANA, ABAP 7.5, SAP Fiori, CDS Views and OData</strong>. I also worked on <strong>RAP service development</strong>, creating the CDS base, composite and consumption views and taking the model through service definition and exposure. In addition to development, I acted as a <strong>POC for evaluating CBO and CFL approaches</strong> and worked with <strong>SAP AIF</strong> for interface monitoring and error-handling scenarios. I take ownership of assigned development work, support production or project issues when required, and have also mentored junior developers.</p></div><div class="experience-context"><span><strong>Project scope:</strong> SD · PPDS · P2P · P2M · MDG</span><span><strong>Delivery:</strong> Requirements · Development · Testing · Cutover support</span></div></div></div></section>
 <section class="reveal" id="projects"><div class="section-head"><div><div class="section-kicker">Project Work</div><h2>What I Worked On</h2></div><p class="intro">Selected areas from my S/4HANA implementation experience.</p></div><div class="case-grid"><div class="case-card" onclick="document.querySelector('#cs-atp').open=true; document.querySelector('#cs-atp').scrollIntoView({behavior:'smooth',block:'center'})"><div class="case-title">ATP Investigation</div><div class="case-description">Investigated availability and batch-related issues in VA01 by tracing the ATP processing flow, comparing results and identifying the technical root cause.</div><span class="case-open">View the investigation</span></div><div class="case-card" onclick="document.querySelector('#cs-customer').open=true; document.querySelector('#cs-customer').scrollIntoView({behavior:'smooth',block:'center'})"><div class="case-title">Customer Master Interface</div><div class="case-description">Worked on an RFC-based customer master interface, including field mapping, ABAP processing and validation during migration activities.</div><span class="case-open">View the interface</span></div><div class="case-card" onclick="document.querySelector('#cs-partner-functions').open=true; document.querySelector('#cs-partner-functions').scrollIntoView({behavior:'smooth',block:'center'})"><div class="case-title">Partner Function Determination</div><div class="case-description">Designed partner function determination for multiple partner functions within sales-document processing.</div><span class="case-open">View the solution</span></div><div class="case-card" onclick="document.querySelector('#cs-odata').open=true; document.querySelector('#cs-odata').scrollIntoView({behavior:'smooth',block:'center'})"><div class="case-title">OData / Fiori Backend</div><div class="case-description">Developed and supported OData backend logic for Fiori scenarios, including ABAP processing, API integration and end-to-end validation.</div><span class="case-open">View the integration</span></div><div class="case-card" onclick="document.querySelector('#cs-rap').open=true; document.querySelector('#cs-rap').scrollIntoView({behavior:'smooth',block:'center'})"><div class="case-title">RAP Service Development</div><div class="case-description">Built a RAP service using CDS base, composite and consumption views, followed by service definition and service exposure.</div><span class="case-open">Explore the RAP implementation</span></div></div><div class="architecture"><span class="arch-node">Fiori / External System</span><span class="arch-node">OData / RFC / IDoc / API</span><span class="arch-node">ABAP Processing</span><span class="arch-node">S/4HANA</span></div></section>
 
 
-<section class="reveal" id="approach">
-<div class="section-head"><div><div class="section-kicker">Problem Solving</div><h2>How I Solve Production Issues</h2></div><p class="intro">A structured approach I use when investigating real SAP issues, from the initial business symptom through technical validation and resolution.</p></div>
-<div class="approach">
-<div class="approach-step"><b>01</b><span>Understand the Issue</span></div>
-<div class="approach-step"><b>02</b><span>Reproduce &amp; Trace</span></div>
-<div class="approach-step"><b>03</b><span>Debug SAP Flow</span></div>
-<div class="approach-step"><b>04</b><span>Find Root Cause</span></div>
-<div class="approach-step"><b>05</b><span>Implement &amp; Test</span></div>
-<div class="approach-step"><b>06</b><span>Validate &amp; Deploy</span></div>
-</div>
-<div class="grid" style="margin-top:16px">
-<div class="card"><strong>Understand the business impact</strong><span class="muted">Start with the reported symptom, expected result and business process affected rather than changing code or configuration immediately.</span></div>
-<div class="card"><strong>Trace the technical flow</strong><span class="muted">Follow the transaction, document flow, enhancement, interface, API or database objects involved in the scenario.</span></div>
-<div class="card"><strong>Identify the root cause</strong><span class="muted">Use debugging, application data, logs and technical analysis to distinguish the actual cause from the visible symptom.</span></div>
-<div class="card"><strong>Fix and validate</strong><span class="muted">Implement the appropriate correction, test the complete business scenario and validate the expected result before deployment.</span></div>
-</div>
-</section>
-<section class="reveal" id="technical-flow">
-<div class="section-head"><div><div class="section-kicker">Technical Perspective</div><h2>SAP Technical Flow</h2></div><p class="intro">How I connect the business requirement or issue to the underlying SAP technical components.</p></div>
-<div class="architecture">
-<span class="arch-node">Business Process</span><span class="arch-node">SAP Transaction / Fiori</span><span class="arch-node">ABAP Logic</span><span class="arch-node">CDS / OData / API</span><span class="arch-node">CPI / AIF / Interface</span><span class="arch-node">S/4HANA / External System</span>
-</div>
-<p class="muted" style="margin-top:14px">Depending on the scenario, the flow can involve debugging ABAP processing, tracing CDS/OData services, following IDoc/RFC/API communication, or checking middleware and interface monitoring before reaching the root cause.</p>
-</section>
 
-<section class="reveal" id="production">
-<div class="section-head"><div><div class="section-kicker">Production Support</div><h2>Production Support Experience</h2></div><p class="intro">Examples of production troubleshooting and resolution work handled across SAP S/4HANA projects.</p></div>
-<div class="grid">
-<div class="card"><div class="accent-line">ATP</div><strong>Availability Check Investigation</strong><span class="muted">Traced ATP processing and related data to identify why the expected availability result was not being produced.</span></div>
-<div class="card"><div class="accent-line">IDoc</div><strong>Interface Error Analysis</strong><span class="muted">Investigated inbound and outbound IDoc issues, including status analysis, partner-profile configuration and processing errors.</span></div>
-<div class="card"><div class="accent-line">Partner Functions</div><strong>Partner Function Determination</strong><span class="muted">Designed partner function determination logic to support multiple partner functions within sales-document processing.</span></div>
-<div class="card"><div class="accent-line">Pricing</div><strong>Pricing &amp; VOFM Investigation</strong><span class="muted">Analyzed pricing determination and routine-based logic to identify why specific pricing conditions were or were not being applied.</span></div>
-<div class="card"><div class="accent-line">OData / Fiori</div><strong>Backend Issue Resolution</strong><span class="muted">Traced OData requests through ABAP backend processing and validated the service response for Fiori scenarios.</span></div>
-<div class="card"><div class="accent-line">Interfaces</div><strong>RFC / CPI / AIF Troubleshooting</strong><span class="muted">Followed interface processing across SAP and integration layers to isolate mapping, processing or communication issues.</span></div>
-</div>
-</section>
+
+
+
 <section id="case-studies">
 <div class="section-heading">
 <h2>Selected Production Issue Resolutions</h2>
@@ -668,7 +653,7 @@ section h2{color:#f0f2f5;font-size:29px}
 
 
 
-<section class="reveal"><div class="section-head"><div><div class="section-kicker">Recruiter FAQ</div><h2>Quick Answers</h2></div><p class="intro">Common questions about my profile and areas of interest.</p></div><div class="grid"><div class="card"><strong>What is your experience?</strong><span class="muted">4 years of SAP ABAP experience across ECC and S/4HANA environments.</span></div><div class="card"><strong>What technologies do you work with?</strong><span class="muted">ABAP, S/4HANA, CDS, OData, RAP, Fiori backend and CPI.</span></div><div class="card"><strong>Are you SAP certified?</strong><span class="muted">SAP Certified Associate – Back-End Developer – ABAP Cloud.</span></div><div class="card"><strong>What opportunities interest you?</strong><span class="muted">SAP ABAP, S/4HANA, ABAP Cloud, integration and backend development roles.</span></div></div></section>
+
 <section class="reveal" id="education"><div class="section-head"><div><div class="section-kicker">Credentials</div><h2>Certification &amp; Education</h2></div><p class="intro">Formal education, SAP certification and structured ABAP training.</p></div><div class="cert-feature"><div class="cert-icon">SAP</div><div><strong>SAP Certified Associate – Back-End Developer – ABAP Cloud</strong><div class="muted">Professional SAP certification focused on modern backend development on the ABAP Cloud stack.</div></div></div><div class="grid"><div class="card"><strong>ABAP Training — Udemy</strong><span class="muted">Core ABAP programming, modularization techniques, Data Dictionary, internal tables and SAP development concepts.</span></div><div class="card"><strong>Bachelor of Computer Applications (BCA)</strong><span class="muted">MITS School of Biotechnology, Bhubaneswar, Odisha · 2022</span></div><div class="card"><strong>12th — Science Stream</strong><span class="muted">Christ College, Cuttack · 2019</span></div><div class="card"><strong>10th</strong><span class="muted">Stewart School, Cuttack · 2016</span></div></div></section>
 <section class="reveal"><div class="grid"><div class="card"><div class="accent-line">Languages</div><strong>English · Hindi</strong></div><div class="card"><div class="accent-line">Interests</div><strong>Cooking · Outdoor Games</strong></div></div></section>
 <section class="reveal"><div class="contact-band"><div><div class="section-kicker" style="color:#9cc9f7">Contact</div><h2 style="color:#fff;margin-bottom:5px">Let's Connect</h2><div class="muted">Interested in discussing SAP ABAP, S/4HANA development, integration or backend opportunities? I'd be happy to connect.</div></div><div class="contact-band-layout"><div><div class="contacts"><a class="contact-link" href="mailto:syedshayan.ali.330@gmail.com?subject=SAP%20ABAP%20Opportunity%20-%20Portfolio%20Website"><svg aria-hidden="true" class="contact-icon" viewBox="0 0 24 24" role="img"><path d="M3 5h18v14H3V5Zm2 2v.4l7 5.1 7-5.1V7l-7 5-7-5Zm0 3.1V17h14v-6.9l-6.41 4.67a1 1 0 0 1-1.18 0L5 10.1Z"/></svg><span>Email</span></a><a class="contact-link" href="https://www.linkedin.com/in/syed-shayan-ali-793152230" rel="noopener" target="_blank"><svg aria-hidden="true" class="contact-icon" viewBox="0 0 24 24" role="img"><path d="M5.1 8.3A1.8 1.8 0 1 0 5.1 4.7a1.8 1.8 0 0 0 0 3.6ZM3.6 9.8h3v9.1h-3V9.8Zm5 0h2.9v1.25h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6v4.81h-3v-4.26c0-1.02-.02-2.33-1.42-2.33-1.42 0-1.64 1.1-1.64 2.26v4.33h-3V9.8Z"/></svg><span>LinkedIn</span></a><button class="share-portfolio" id="sharePortfolio" type="button" aria-label="Share this portfolio"><svg aria-hidden="true" class="contact-icon" viewBox="0 0 24 24" role="img"><path d="M18 16.1c-.77 0-1.46.3-1.99.78L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.02-4.09A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.07 9.79A3 3 0 1 0 9 14.21l7.1 4.19c-.06.19-.1.39-.1.6a3 3 0 1 0 2-2.9Z"/></svg><span>Share Portfolio</span></button></div><div class="contacts" style="margin-top:8px"></div></div><div class="portfolio-qr" aria-label="Portfolio QR code"><img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=8&data=https%3A%2F%2Fshayan263.github.io%2FShayan_Profile%2F%3Futm_source%3Dqr%26utm_medium%3Doffline%26utm_campaign%3Dportfolio_qr" alt="QR code to open Syed Shayan Ali portfolio" width="180" height="180" loading="lazy" decoding="async"/><div><strong>Scan to view portfolio</strong><span>Open the live portfolio instantly from your phone.</span></div></div></div></div></section>
